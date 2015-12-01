@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <meta name="description" content="The Avatar Generator. Allow you generate your own avatar." />
+    <meta name="keywords" content="avatar,generator,maker" />
+    <meta name="author" content="Oleksiy Nesterov" />
+    <meta name="copyright" content="Oleksiy Nesterov" />
+
+    <meta name="viewport" content="width=640" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- meta name="apple-itunes-app" content="app-id=XXXXXXXXX" / -->
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="MobileOptimized" content="640" />    
+    
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="shortcut" type="image/png" href="shortcut.png" />
+    <link rel="apple-touch-icon" href="shortcut.png" />
+    <link rel="apple-touch-icon-precomposed" href="shortcut.png" />
+
+    <meta property="og:url" content="http://avatar-generator.appspot.com" />
+    <meta property="og:image" content="http://avatar-generator.appspot.com/cover.jpg" />
+	<meta property="og:type" content="website" />
+    <meta property="og:title" content="The Avatar Generator" />
+    <meta property="og:description" content="Allow you generate your own avatar." />
+	<meta property="og:site_name" content="The Avatar Generator" />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="text/javascript" src="js/audio-fx.min.js"></script>
+    <script type="text/javascript" src="js/avatar-data.js"></script>
+    <title>The Avatar Generator</title>
+</head>
+<body class="middle" ontouchstart="">
+    <div id="editor">
+        <ol class="noflick">
+            <li id="editor-background"></li>
+            <li id="editor-shadow"></li>
+            <li id="editor-ears"></li>
+            <li id="editor-face"></li>
+            <li id="editor-mouth"></li>
+            <li id="editor-nose"></li>
+            <li id="editor-clothes"></li>
+            <li id="editor-beard"></li>
+            <li id="editor-mustache"></li>
+            <li id="editor-eyes"></li>
+            <li id="editor-eyebrows"></li>
+            <li id="editor-hair"></li>
+            <li id="editor-accessories"></li>
+        </ol>
+        <ul id="editor-options" class="noflick"></ul>
+        <ul id="editor-colors" class="noflick"></ul>
+        <button id="interface-female" class="button small right bottom group1"></button>
+        <button id="interface-male" class="button small left bottom group1"></button>
+        
+        <button id="interface-save" class="button small"></button>
+        <button id="category" class="button big"></button>
+        <button id="interface-random" class="button small"></button>
+        
+        <div id="logo"></div>
+        <a id="contact" href="javascript:Avatar.contactMe()">contact me</a>
+    </div>
+    <div id="interface" class="middle overlay">
+        <ul>
+            <li class="translate0"><button id="interface-hair" class="button big group2"></button><span>hair</span></li>
+            <li class="translate1"><button id="interface-eyebrows" class="button big group2"></button><span>eyebrows</span></li>
+            <li class="translate2"><button id="interface-eyes" class="button big group2"></button><span>eyes</span></li>
+            <li class="translate3"><button id="interface-mouth" class="button big group2"></button><span>mouth</span></li>
+            <li class="translate4"><button id="interface-mustache" class="button big group2"></button><span>mustache</span></li>
+            
+            <li class="translate5"><button id="interface-nose" class="button big group2"></button><span>nose</span></li>
+            <li class="translate6"><button id="interface-ears" class="button big group2"></button><span>ears</span></li>
+            <li class="translate7"><button id="interface-race" class="button big group2"></button><span>skin</span></li>
+            <li class="translate8"><button id="interface-clothes" class="button big group2"></button><span>clothes</span></li>
+            <li class="translate9"><button id="interface-beard" class="button big group2"></button><span>beard</span></li>
+            
+            <li class="translate6"><button id="interface-background" class="button big group2"></button><span>background</span></li>
+            <li class="translate8"><button id="interface-accessories" class="button big group2"></button><span>accessories</span></li>
+        </ul>
+    </div>
+    <div id="download" class="middle overlay">
+        <a id="interface-download" class="button big" target="_blank"></a>
+    </div>
+</body>
+<script type="text/javascript" src="js/avatar.js"></script>
+</html>

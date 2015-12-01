@@ -1,0 +1,45 @@
+application: avatar-generator
+version: 1
+runtime: php55
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /img
+  static_dir: img
+
+- url: /css
+  static_dir: css
+  
+- url: /js
+  static_dir: js  
+
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+
+- url: /favicon.png
+  static_files: favicon.png
+  upload: favicon.png  
+
+- url: /icon.png
+  static_files: icon.png
+  upload: icon.png
+
+- url: /shortcut.png
+  static_files: shortcut.png
+  upload: shortcut.png
+
+- url: /cover.jpg
+  static_files: cover.jpg
+  upload: cover.jpg
+  
+- url: /.*
+  script: index.html
+  
+skip_files:
+
+- ^(.*/)?\.(bak|cmd|db|yaml)$
+- ^~.*$
+- ^(.*/)?~.*$
