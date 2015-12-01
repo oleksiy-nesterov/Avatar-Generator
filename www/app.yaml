@@ -13,33 +13,18 @@ handlers:
   static_dir: css
   
 - url: /js
-  static_dir: js  
-
-- url: /favicon.ico
-  static_files: favicon.ico
-  upload: favicon.ico
-
-- url: /favicon.png
-  static_files: favicon.png
-  upload: favicon.png  
-
-- url: /icon.png
-  static_files: icon.png
-  upload: icon.png
-
-- url: /shortcut.png
-  static_files: shortcut.png
-  upload: shortcut.png
-
-- url: /cover.jpg
-  static_files: cover.jpg
-  upload: cover.jpg
+  static_dir: js
   
+- url: /(.*\.(gif|png|jpg|ico))$
+  static_files: static/\1
+  upload: static/.*\.(gif|png|jpg|ico)$
+
 - url: /.*
   script: index.html
   
 skip_files:
 
+- ^.+\.(bak|cmd|db|yaml)$
 - ^(.*/)?\.(bak|cmd|db|yaml)$
 - ^~.*$
 - ^(.*/)?~.*$
