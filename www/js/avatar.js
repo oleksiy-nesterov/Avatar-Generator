@@ -601,9 +601,9 @@ window.Avatar = (function(){
     };
     self.init = function(data, schema){
         var
-        interface = document.getElementById(_interfaceId),
-        download = document.getElementById(_downloadLayerId),
-        more = document.getElementById(_moreId),
+        interfaceEl = document.getElementById(_interfaceId),
+        downloadEl = document.getElementById(_downloadLayerId),
+        moreEl = document.getElementById(_moreId),
         addColors = function(list, angle){
             var a = 0; arc = list.length * 12;
             _uiColors.setOptions(list, arc);
@@ -653,16 +653,16 @@ window.Avatar = (function(){
         },
         onDeactivate = function(evt){
             var el = evt.currentTarget;
-            window.setTimeout(function(){activateElement(el, false);}, download == el ? 500 : 100);
+            window.setTimeout(function(){activateElement(el, false);}, downloadEl == el ? 500 : 100);
         };
         document.addEventListener('touchstart', onClick, true);
         document.addEventListener('mousedown', onClick, true);
-        interface.addEventListener('touchstart', onDeactivate, true);
-        interface.addEventListener('mousedown', onDeactivate, true);
-        more.addEventListener('touchstart', onDeactivate, true);
-        more.addEventListener('mousedown', onDeactivate, true);        
-        download.addEventListener('touchstart', onDeactivate, true);
-        download.addEventListener('mousedown', onDeactivate, true);
+        interfaceEl.addEventListener('touchstart', onDeactivate, true);
+        interfaceEl.addEventListener('mousedown', onDeactivate, true);
+        moreEl.addEventListener('touchstart', onDeactivate, true);
+        moreEl.addEventListener('mousedown', onDeactivate, true);        
+        downloadEl.addEventListener('touchstart', onDeactivate, true);
+        downloadEl.addEventListener('mousedown', onDeactivate, true);
         
         _uiColors.init({
             onActive:function(option){
