@@ -323,6 +323,7 @@ window.Avatar = (function(){
     _downloadLayerId   = 'download',
     _editorId          = 'editor',
     _interfaceId       = 'interface',
+    _moreId            = 'more',
     _emptyCategory     = 'none',
     _assetsUrl         = 'img/assets/',
     _emptyImage        = 'img/empty.png',
@@ -602,6 +603,7 @@ window.Avatar = (function(){
         var
         interface = document.getElementById(_interfaceId),
         download = document.getElementById(_downloadLayerId),
+        more = document.getElementById(_moreId),
         addColors = function(list, angle){
             var a = 0; arc = list.length * 12;
             _uiColors.setOptions(list, arc);
@@ -643,7 +645,8 @@ window.Avatar = (function(){
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){var el = document.getElementById(_interfaceId + '-download'); el.href = c.toDataURL(); el.download = 'avatar.png'; activateElement(_downloadLayerId, true);}); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
             };
-            if(evt.target.id == 'interface-download'){return;}; 
+            if(evt.target.id == 'interface-download'){return;};
+            //if(evt.target.nodeName == 'A' && evt.target.href){window.open(evt.target.href, '_blank');};
             evt.stopPropagation();
             evt.preventDefault();
             return false;
@@ -656,6 +659,8 @@ window.Avatar = (function(){
         document.addEventListener('mousedown', onClick, true);
         interface.addEventListener('touchstart', onDeactivate, true);
         interface.addEventListener('mousedown', onDeactivate, true);
+        more.addEventListener('touchstart', onDeactivate, true);
+        more.addEventListener('mousedown', onDeactivate, true);        
         download.addEventListener('touchstart', onDeactivate, true);
         download.addEventListener('mousedown', onDeactivate, true);
         
@@ -705,6 +710,8 @@ window.Avatar = (function(){
             ['avatar', 'gmail'].join('@'), '.com'
         ].join(''), '_blank');
     };
-    
+    self.moreApps = function(){
+        activateElement('more', true);
+    };
     return self;
 }).call({}).init(window.AvatarData);

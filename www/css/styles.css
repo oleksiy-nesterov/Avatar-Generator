@@ -206,11 +206,64 @@ a:hover {
     width: 75px;
     height: 75px;
 }
+.button.app {
+    border-radius: 20%;
+    -webkit-border-radius: 20%;
+}
+.button.app.interact, .button.app:hover {
+    border-color: #ff4242;
+}
+.button.app.interact + span{
+    color: #ff4242;
+}
 .button[disabled],
 .button.disabled {
     opacity: 0.2;
     point-events: none;
     cursor: default;
+}
+.panel ul {
+    text-align: center;
+    font-size: 14px;
+    max-width: 640px;
+}
+.panel ul li {
+    display: inline-block;
+    text-align: center;
+    margin: 5px;
+    font-size: 19px;
+    position: relative;
+    opacity: 0;
+    will-change: transform, opacity;
+    -webkit-transition: -webkit-transform ease 0.5s, opacity linear 0.3s;
+    transition: transform ease 0.5s, opacity linear 0.3s;
+}
+.panel.active ul li {
+    opacity: 1;
+    -webkit-transform: translateX(0) translateY(0)!important;
+    -ms-transform: translateX(0) translateY(0)!important;
+    transform: translateX(0) translateY(0)!important;
+}
+.panel ul li .button {
+    display: block;
+    margin: 5px -5px;
+}
+.panel ul li .button.active + span {
+    color: #ff4242;
+    font-weight: bold;
+}
+.link{
+    color: #f00;
+    font-size: 16px;
+    margin: 5px 0;
+    display: inline-block;
+    padding: 5px 0;
+}
+.link + .link:before{
+    content: '|';
+    display: inline-block;
+    color: #000;
+    padding: 0 10px;
 }
 #logo{
     background: transparent url(../img/logo.png) no-repeat center top;
@@ -220,10 +273,6 @@ a:hover {
     right: 0;
     height: 80px;
     point-events: none;
-}
-#contact{
-    content: url(../img/email.png);
-    margin-top: 20px;
 }
 #editor {
     padding: 70px;
@@ -330,36 +379,6 @@ a:hover {
 #editor-shadow {
     background: transparent url(../img/bg.png) no-repeat center bottom;
 }
-#interface ul {
-    text-align: center;
-    font-size: 14px;
-    max-width: 640px;
-}
-#interface ul li {
-    display: inline-block;
-    text-align: center;
-    margin: 5px;
-    font-size: 19px;
-    position: relative;
-    opacity: 0;
-    will-change: transform, opacity;
-    -webkit-transition: -webkit-transform ease 0.5s, opacity linear 0.3s;
-    transition: transform ease 0.5s, opacity linear 0.3s;
-}
-#interface.active ul li {
-    opacity: 1;
-    -webkit-transform: translateX(0) translateY(0)!important;
-    -ms-transform: translateX(0) translateY(0)!important;
-    transform: translateX(0) translateY(0)!important;
-}
-#interface ul li .button {
-    display: block;
-    margin: 5px -5px;
-}
-#interface ul li .button.active + span {
-    color: #ff4242;
-    font-weight: bold;
-}
 #interface-hair,
 .interface-hair {
     background-image: url(../img/btn-hair.png);
@@ -433,6 +452,22 @@ a:hover {
 .interface-accessories {
     background-image: url(../img/btn-accessories.png);
 }
+#interface-pipuzzle,
+.interface-pipuzzle {
+    background-image: url(../img/pipuzzle.png);
+}
+#interface-pipuzzle-v,
+.interface-pipuzzle-v {
+    background-image: url(../img/pipuzzle-v.png);
+}
+#interface-pipuzzle-f,
+.interface-pipuzzle-f {
+    background-image: url(../img/pipuzzle-f.png);
+}
+#interface-pipuzzle-p,
+.interface-pipuzzle-p {
+    background-image: url(../img/pipuzzle-p.png);
+}
 #category {
     margin-top: 70px;
 }
@@ -444,7 +479,6 @@ a:hover {
     -webkit-transform: translateX(-95px) translateY(395px) scale(0.5) rotateZ(-820deg);
     -ms-transform: translateX(-95px) translateY(395px) scale(0.5) rotateZ(-820deg);
     transform: translateX(-95px) translateY(395px) scale(0.5) rotateZ(-820deg);
-    will-change: transform;
     -webkit-transition: -webkit-transform 1s ease, opacity linear 0.3s;
     transition: transform 1s ease, opacity linear 0.3s;
 }
@@ -466,7 +500,7 @@ a:hover {
     }
 }
 @media (max-height: 800px) {
-    #contact{
+    #links{
         margin-top: 70px;
     }
     #interface-female{
@@ -478,12 +512,12 @@ a:hover {
         bottom: auto;
         top: 0;
         left: 0;
-    }    
+    }
     #interface-save{
         position: absolute;
         bottom: 0;
         left: 0;
-    }    
+    }
     #interface-random{
         position: absolute;
         bottom: 0;
