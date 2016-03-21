@@ -665,7 +665,13 @@ window.Avatar = (function(){
                 }); break;
             };
             if(evt.target.id == 'interface-download'){return;};
-            if(evt.target.nodeName == 'A' && evt.target.href){return;};
+            if(evt.target.nodeName == 'A' && evt.target.href){
+                if(window.cordova){
+                    window.open(evt.target.href, '_system');
+                }else{
+                    return;
+                };
+            };
             evt.stopPropagation();
             evt.preventDefault();
             return false;
