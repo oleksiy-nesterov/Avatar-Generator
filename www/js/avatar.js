@@ -642,8 +642,24 @@ window.Avatar = (function(){
                 case 'interface-female'      : self.gender = 'female'; break;
                 case 'interface-male'        : self.gender = 'male'; break;
                 case 'interface-random'      : self.randomSchema(); break;
-                case 'interface-save'        : self.drawSchema(self.schema, function(c){var el = document.getElementById(_interfaceId + '-download'); el.href = c.toDataURL(); el.download = 'avatar.png'; activateElement(_downloadLayerId, true);}); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
+                case 'interface-save'        : self.drawSchema(self.schema, function(c){
+                    var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
+                    if(window.cordova && window.cordova.base64ToGallery){
+                        cordova.base64ToGallery(
+                            dataUrl,
+                            'avatar_',
+                            function(){},
+                            function(err){
+                                console.error(err);
+                            }
+                        );
+                    }else{
+                        el.href = dataUrl;
+                        el.download = 'avatar.png';
+                        activateElement(_downloadLayerId, true);    
+                    };
+                }); break;
             };
             if(evt.target.id == 'interface-download'){return;};
             //if(evt.target.nodeName == 'A' && evt.target.href){window.open(evt.target.href, '_blank');};

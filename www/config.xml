@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0" id="com.webmotoric.avatar-generator" version="1.0.0">
+    <name>The Avatar Generator</name>
+    <description>Allow you generate your own avatar.</description>
+    <author href="http://avatar-generator.appspot.com" email="oleksiy.nesterov+avatar@gmail.com">Avatar Generator</author>
+
+    <icon src="img/splashes-icons/57.png"  width="57"  height="57"  />
+    <icon src="img/splashes-icons/72.png"  width="72"  height="72" platform="ios" />
+    <icon src="img/splashes-icons/60.png"  width="60"  height="60"  />
+    <icon src="img/splashes-icons/76.png"  width="76"  height="76"  />
+    <icon src="img/splashes-icons/114.png" width="114" height="114" />
+    <icon src="img/splashes-icons/120.png" width="120" height="120" />
+    <icon src="img/splashes-icons/144.png" width="144" height="144" />
+    <icon src="img/splashes-icons/152.png" width="152" height="152" />
+    <icon src="img/splashes-icons/180.png" width="180" height="180" />
+    <icon src="img/splashes-icons/36.png"  width="36"  height="36"  platform="android" qualifier="ldpi" />
+    <icon src="img/splashes-icons/48.png"  width="48"  height="48"  platform="android" qualifier="mdpi" />
+    <icon src="img/splashes-icons/72.png"  width="72"  height="72"  platform="android" qualifier="hdpi" />
+    <icon src="img/splashes-icons/96.png"  width="96"  height="96"  platform="android" qualifier="xhdpi" />
+    <icon src="img/splashes-icons/144.png" width="144" height="144" platform="android" qualifier="xxhdpi" />
+    <icon src="img/splashes-icons/80.png"  width="80"  height="80"  platform="blackberry" />
+    <icon src="img/splashes-icons/80.png"  width="80"  height="80"  platform="blackberry" state="hover" />
+    <icon src="img/splashes-icons/48.png"  width="48"  height="48"  platform="winphone" />
+    <icon src="img/splashes-icons/173.png" width="173" height="173" platform="winphone" role="background" />
+    <icon src="img/splashes-icons/64.png"  width="64"  height="64"  platform="webos" />
+    <icon src="img/splashes-icons/32.png"  width="32"  height="32"  platform="webos" role="mini" />
+
+    <splash src="splash.png" />
+
+    <splash src="img/splashes-icons/ldpi.9.png"    platform="android" qualifier="ldpi" />             <!-- Android 200x320 -->
+    <splash src="img/splashes-icons/ldpi.9.png"    platform="android" qualifier="mdpi" />             <!-- Android 320x480 -->
+    <splash src="img/splashes-icons/hdpi.9.png"    platform="android" qualifier="hdpi" />             <!-- Android 480x800 -->
+    <splash src="img/splashes-icons/xhdpi.9.png"   platform="android" qualifier="xhdpi" />            <!-- Android 720px1280 -->
+    <splash src="img/splashes-icons/xhdpi.9.png"   platform="android" qualifier="xxhdpi" />           <!-- Android -->
+    <splash src="img/splashes-icons/320X426.png"                      width="320"  height="426" />
+    <splash src="img/splashes-icons/320X470.png"                      width="320"  height="470" />
+    <splash src="img/splashes-icons/320X480.png"   platform="ios"     width="320"  height="480" />    <!-- iPhone 3 -->
+    <splash src="img/splashes-icons/480X640.png"   platform="ios"     width="480"  height="640" />
+    <splash src="img/splashes-icons/640X960.png"                      width="640"  height="960" />    <!-- iPhone 4 (2x) -->
+    <splash src="img/splashes-icons/640X1136.png"  platform="ios"     width="640"  height="1136" />   <!-- iPhone 5 (2x) -->
+    <splash src="img/splashes-icons/720X960.png"                      width="720"  height="960" />
+    <splash src="img/splashes-icons/720X1280.png"                     width="720"  height="1280" />
+    <splash src="img/splashes-icons/750X1334.png"  platform="ios"     width="750"  height="1334" />   <!-- iPhone 6 (2x) -->
+    <splash src="img/splashes-icons/768X1024.png"  platform="ios"     width="768"  height="1024" />   <!-- iPad -->
+    <splash src="img/splashes-icons/1496X2048.png" platform="ios"     width="1536" height="2048" />   <!-- iPad 2 (2x) -->
+    <splash src="img/splashes-icons/1080X1920.png"                    width="1080" height="1920" />
+    <splash src="img/splashes-icons/1242X2208.png" platform="ios"     width="1242" height="2208" />   <!-- iPhone 6 Plus (3x) -->
+
+    <platform name="ios" />
+    <platform name="android" />
+
+    <!-- GENERAL PREFERENCES -->
+    <preference name="phonegap-version" value="cli-6.0.0" />
+    <preference name="android-minSdkVersion" value="15" />
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="fullscreen" value="false" />
+    <preference name="orientation" value="portrait" />
+    <preference name="autorotate" value="false" readonly="true" />
+    <preference name="target-device" value="universal" />
+    <preference name="backgroundcolor" value="0xffffffff" />
+    <feature name="WebViewColor"><param name="ios-package" value="WebViewColor" /></feature>
+
+    <!-- OTHER PREFERENCES -->
+    <preference name="webviewbounce" value="false" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="detect-data-types" value="false" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="exit-on-suspend" value="false" />
+
+    <preference name="show-splash-screen-spinner" value="false" />
+    <preference name="splash-screen-duration" value="20000" />
+    <preference name="auto-hide-splash-screen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false"/>
+    <preference name="SplashScreenDelay" value="20000"/>
+    <preference name="SplashScreenBackgroundColor" value="#ffffff" />
+
+    <preference name="EnableViewportScale" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
+
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="KeyboardShrinksView" value="false" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
+    <feature name="Keyboard"><param name="ios-package" value="CDVKeyboard" onload="true" /></feature>
+
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="black-opaque" />
+    <preference name="StatusBarBackgroundColor" value="#ffffff" />
+    <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
+
+    <!-- CORE PLUGINS -->
+    <plugin name="cordova-plugin-device"                     source="npm" />
+    <plugin name="cordova-plugin-splashscreen"               source="npm" spec="3.0.0" />
+    <plugin name="cordova-plugin-statusbar"                  source="npm" />
+    <plugin name="cordova-plugin-whitelist"                  source="npm" spec="1.0.0" />
+    <plugin name="cordova-base64-image-saver"                source="npm" />
+
+    <!-- CONFIGS -->
+    <config-file platform="ios" parent="UIStatusBarHidden" overwrite="true"><true /></config-file>
+    <config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true"><false /></config-file>
+    <config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file>
+    <!--config-file platform="ios" parent="CFBundleShortVersionString"><string>0.0.0</string></config-file -->
+    <!--config-file platform="ios" parent="CFBundleVersion"><string>0.0.0</string></config-file -->
+
+    <allow-intent href="*" />
+    <allow-navigation href="*" />
+    <access origin="*" />
+    <access origin="cdvfile:*" launch-external="yes" />
+    <access origin="content:*" launch-external="yes" />
+</widget>
