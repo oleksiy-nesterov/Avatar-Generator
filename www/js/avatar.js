@@ -646,12 +646,15 @@ window.Avatar = (function(){
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
                     var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
                     if(window.cordova && window.cordova.base64ToGallery){
+                        console.log('save');
                         cordova.base64ToGallery(
                             dataUrl,
                             'avatar_',
-                            function(){},
-                            function(err){
-                                console.error(err);
+                            function(){
+                                console.log(arguments);
+                            },
+                            function(){
+                                console.log(arguments);
                             }
                         );
                     }else{
@@ -662,7 +665,7 @@ window.Avatar = (function(){
                 }); break;
             };
             if(evt.target.id == 'interface-download'){return;};
-            //if(evt.target.nodeName == 'A' && evt.target.href){window.open(evt.target.href, '_blank');};
+            if(evt.target.nodeName == 'A' && evt.target.href){return;};
             evt.stopPropagation();
             evt.preventDefault();
             return false;
