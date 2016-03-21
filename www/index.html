@@ -98,4 +98,11 @@
     </div>
 </body>
 <script type="text/javascript" src="js/avatar.js"></script>
+<script type="text/javascript">
+    window.app = {init:function(){
+        window.navigator.splashscreen && window.navigator.splashscreen.hide();
+        window.StatusBar && window.StatusBar.show();
+    }};
+</script>
+<script type="text/javascript" src="phonegap.js" onerror="window.app.init();" onload="document.addEventListener('deviceready',window.app.init,false);"></script>
 </html>

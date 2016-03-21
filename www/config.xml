@@ -96,6 +96,7 @@
     <plugin name="cordova-plugin-statusbar"                  source="npm" />
     <plugin name="cordova-plugin-whitelist"                  source="npm" spec="1.0.0" />
     <plugin name="cordova-base64-image-saver"                source="npm" />
+    <plugin name="org.crosswalk.engine"                      source="pgb" />
 
     <!-- CONFIGS -->
     <config-file platform="ios" parent="UIStatusBarHidden" overwrite="true"><true /></config-file>
