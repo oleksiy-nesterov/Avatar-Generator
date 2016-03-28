@@ -649,13 +649,13 @@ window.Avatar = (function(){
                 case 'interface-random'      : self.randomSchema(); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
-                    var el = document.getElementById(_interfaceId + '-download');
+                    var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
                     if(window.cordova && window.cordova.base64ToGallery){
                         el.href = 'javascript:void(0)';
                         el.removeAttribute('download');
-                        el.onclick = function(){Avatar.mobileDownload();}
+                        el.onclick = function(){Avatar.saveToAlbum(dataUrl);}
                     }else{
-                        el.href = c.toDataURL();
+                        el.href = dataUrl;
                         el.download = 'avatar.png';
                         el.onclick = function(){notification('The download will start within second.');}
                     };
@@ -727,8 +727,7 @@ window.Avatar = (function(){
         _categoryChanged();
         return self;
     };
-    self.mobileDownload = function(){
-        alert('save');
+    self.saveToAlbum = function(dataUrl){
         if(window.cordova && window.cordova.base64ToGallery){
             cordova.base64ToGallery(
                 dataUrl,
