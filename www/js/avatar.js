@@ -728,6 +728,7 @@ window.Avatar = (function(){
         return self;
     };
     self.mobileDownload = function(){
+        alert('save');
         if(window.cordova && window.cordova.base64ToGallery){
             cordova.base64ToGallery(
                 dataUrl,
