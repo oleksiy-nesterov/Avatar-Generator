@@ -6,7 +6,12 @@ window.Avatar = (function(){
     normalizeAngle    = function(a){a = a < 0 ? 360 + a : a; return Math.abs(a >= 360 ? 0 : a);},
     getRandomKey      = function(o, range){var k = Object.keys(o); return range || k.length ? k[k.length > 1 ? Math.floor(Math.random() * (range && range < k.length ? range : k.length)) : 0] : null;},
     activateElement   = function(el, s){el = typeof(el) == 'string' ? document.getElementById(el) : el; el && el.classList[s ? 'add' : 'remove']('active');},
-    
+    notification      = function(html){
+        var div = document.createElement('DIV'); div.className = 'notification'; div.innerHTML = html; document.body.appendChild(div);
+        window.setTimeout(function(){div.classList.add('active');}, 100);
+        window.setTimeout(function(){document.body.removeChild(div)}, 5000);
+    };
+
     storage = (function(){
         var o = this;
         o.is = Boolean(window['localStorage']) || false;
@@ -54,8 +59,8 @@ window.Avatar = (function(){
             return list;
         };
         return o;
-    }).call({}),    
-    
+    }).call({}),
+
     classOptions = function(){
         var
         o             = this,
@@ -70,7 +75,7 @@ window.Avatar = (function(){
         _stringify    = '',
         _onActive     = null,
         _onSet        = null,
-        
+
         removeOptions = function(){
             o.forOptions(function(option){option.element.parentElement.removeChild(option.element);});
             _allOptions = {};
@@ -92,7 +97,7 @@ window.Avatar = (function(){
             _holder.appendChild(el);
             return data;
         };
-        
+
         o.init = function(params){
             //{selector:'', list:[], onActive:null, onSet:null, cssClass:'', arcAngle:360, audion:''}
             _class    = params.cssClass || '';
@@ -100,9 +105,9 @@ window.Avatar = (function(){
             _onActive = params.onActive;
             _onSet    = params.onSet;
             _holder   = document.querySelector(params.selector);
-            
+
             if(!_holder){return 0;};
-            
+
             var onClick = function(evt){
                 if(evt.target.parentElement == _holder && typeof(evt.target.dataset.angle) != 'undefined'){
                     o.currentAngle = evt.target.dataset.angle;
@@ -142,7 +147,7 @@ window.Avatar = (function(){
         };
         Object.defineProperty(o, 'count', {
             get: function(){return Object.keys(_allOptions).length;}
-        });        
+        });
         Object.defineProperty(o, 'snapAngle', {
             get: function(){return _snapAngle || 1;}
         });
@@ -173,7 +178,7 @@ window.Avatar = (function(){
                 if(val === _position || o.snapAngle * val > 360 || o.snapAngle * val < 0){return;};
                 o.currentAngle = o.snapAngle * val;
             }
-        });            
+        });
         return o;
     },
     classCursor = function(){
@@ -191,7 +196,7 @@ window.Avatar = (function(){
         _snapAngle    = 1,
         _snapDistance = 10,
         _data         = null,
-        
+
         getAngleByVector = function(x0, y0, x1, y1){
             return normalizeAngle(Math.atan2(x1 - x0, y1 - y0) * radToDeg * -1);
         },
@@ -227,14 +232,14 @@ window.Avatar = (function(){
             d < _snapDistance && (o.currentAngle = a);
             evt.stopPropagation();
             evt.preventDefault();
-            return false;            
+            return false;
         },
         onEnd = function(evt){
             if(!_data || !_data.moved){return;};
             o.currentAngle = getAngleByVector(_data.x1, _data.y1, _data.x2, _data.y2);
             _data = null;
         };
-        
+
         o.init = function(params){
             //params:{selector:'', snapAngle:0, currentAngle:0, currentPosition:0, onSnap:null, onRotate:null, onRollback:null}
             _snapAngle  = params.snapAngle || 1;
@@ -242,9 +247,9 @@ window.Avatar = (function(){
             _onRotate   = params.onRotate;
             _onRollback = params.onRollback;
             _holder     = document.querySelector(params.selector);
-            
+
             if(!_holder){return false;};
-            
+
             _holder.classList.add('cursor-holder');
             _radius = parseInt(window.getComputedStyle(_holder.parentElement, null).getPropertyValue('height'), 10) / 2;
             _cursor = document.createElement('LI');
@@ -279,7 +284,7 @@ window.Avatar = (function(){
                 if(val === _position || o.snapAngle * val > 360 || o.snapAngle * val < 0){return;};
                 o.currentAngle = o.snapAngle * val;
             }
-        });        
+        });
         Object.defineProperty(o, 'currentAngle', {
             get: function(){return _angle || 0;},
             set: function(val){
@@ -298,7 +303,7 @@ window.Avatar = (function(){
         });
         return o;
     };
-    
+
     var
     _data              = null;
     _schema            = null,
@@ -329,7 +334,7 @@ window.Avatar = (function(){
     _emptyImage        = 'img/empty.png',
     _shadowImage       = 'img/bg.png',
     _emptyOptionValue  = 'none',
-    
+
     _getValuesFor = function(g, c){
         if(!self.data){return [];};
         for(var d in self.dependentCategories){
@@ -400,13 +405,13 @@ window.Avatar = (function(){
             });
         };
     };
-    
+
     self.categories          = [];
     self.allCategories       = {};
     self.uniqueCategories    = {};
     self.dependentCategories = {race: ['face', 'nose', 'ears']};
     self.skipRenderFor       = ['race', 'gender'];
-    
+
     Object.defineProperty(self, 'data', {
         get: function(){return _data;},
         set: function(val){
@@ -473,7 +478,7 @@ window.Avatar = (function(){
             _categoryChanged();
         }
     });
-    
+
     self.randomSchema = function(justGenerate, randomRange){
         var newSchema = {}, dependents = {},
         stackProperty = function(stack, obj, dep){
@@ -492,7 +497,7 @@ window.Avatar = (function(){
         setProperty = function(property, dep){
             var key, sex = self.data.gender[newSchema.gender];
             if(sex[property]){
-                key = getRandomKey(sex[property], randomRange); 
+                key = getRandomKey(sex[property], randomRange);
                 if(!key){return;};
                 if(typeof(sex[property][key]) == 'object'){
                     newSchema[property] = stackProperty([key], sex[property][key], dep);
@@ -594,7 +599,7 @@ window.Avatar = (function(){
         };
         for(var i = 0; i < self.categories.length; i++){
             if(result[self.categories[i]] && result[self.categories[i]] != _emptyCategory){
-                addImage(_assetsUrl + result[self.categories[i]]);    
+                addImage(_assetsUrl + result[self.categories[i]]);
             };
             self.categories[i] == 'background' && addImage(_shadowImage);
         };
@@ -644,24 +649,17 @@ window.Avatar = (function(){
                 case 'interface-random'      : self.randomSchema(); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
-                    var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
+                    var el = document.getElementById(_interfaceId + '-download');
                     if(window.cordova && window.cordova.base64ToGallery){
-                        console.log('save');
-                        cordova.base64ToGallery(
-                            dataUrl,
-                            'avatar_',
-                            function(){
-                                console.log(arguments);
-                            },
-                            function(){
-                                console.log(arguments);
-                            }
-                        );
+                        el.href = 'javascript:void(0)';
+                        el.removeAttribute('download');
+                        el.onclick = function(){Avatar.mobileDownload();}
                     }else{
-                        el.href = dataUrl;
+                        el.href = c.toDataURL();
                         el.download = 'avatar.png';
-                        activateElement(_downloadLayerId, true);    
+                        el.onclick = function(){notification('The download will start within second.');}
                     };
+                    window.setTimeout(function(){activateElement(_downloadLayerId, true);}, 100);
                 }); break;
             };
             if(evt.target.id == 'interface-download'){return;};
@@ -685,19 +683,19 @@ window.Avatar = (function(){
         interfaceEl.addEventListener('touchstart', onDeactivate, true);
         interfaceEl.addEventListener('mousedown', onDeactivate, true);
         moreEl.addEventListener('touchstart', onDeactivate, true);
-        moreEl.addEventListener('mousedown', onDeactivate, true);        
+        moreEl.addEventListener('mousedown', onDeactivate, true);
         downloadEl.addEventListener('touchstart', onDeactivate, true);
         downloadEl.addEventListener('mousedown', onDeactivate, true);
-        
+
         _uiColors.init({
             onActive:function(option){
                 option && self.setSchemaProperty(self.category, [self.schema[self.category][0], option.value]);
             },
             onSet:function(){
                 _uiColors.forOptions(function(option){
-                    option.element.style.backgroundColor = option.value;    
+                    option.element.style.backgroundColor = option.value;
                 })
-            },            
+            },
             selector:'#' + _editorId + '-colors', cssClass:'color'
         });
         _uiOptions.init({
@@ -709,7 +707,7 @@ window.Avatar = (function(){
                 self.setSchemaProperty(self.category, value);
             },
             selector:'#' + _editorId + '-options'
-        });        
+        });
         _uiCursor.init({
             onSnap:function(angle, position){
                 _uiOptions.currentAngle = angle;
@@ -721,13 +719,23 @@ window.Avatar = (function(){
                 rotateColors(angle);
             },
             selector:'#' + _editorId + '-options'
-        });     
-        
+        });
+
         self.data = data;
         self.schema = schema || storage.load('avatarSchema') || _defaultSchema;
         _genderChanged();
         _categoryChanged();
         return self;
+    };
+    self.mobileDownload = function(){
+        if(window.cordova && window.cordova.base64ToGallery){
+            cordova.base64ToGallery(
+                dataUrl,
+                'avatar_',
+                function(){notification('Avatar has been saved into album.');},
+                function(){}
+            );
+        };
     };
     self.contactMe = function(){
         window.open([

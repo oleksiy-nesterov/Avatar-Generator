@@ -81,6 +81,33 @@ a:hover {
     left: 50%;
     top: 50%;
 }
+.notification {
+    position: absolute;
+    left: 50%;
+    bottom: 70%;
+    width: 200px;
+    margin-left: -110px;
+    padding: 10px;
+    background-color: #ff4242;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1.2;
+    border-radius: 10px;
+    border: #000 solid 5px;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: opacity linear 0.5s, -webkit-transform 1s 2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transition: opacity linear 0.5s, transform 1s 2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transition: opacity linear 0.5s, transform 1s 2s cubic-bezier(0.18, 0.89, 0.32, 1.28), -webkit-transform 1s 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    -ms-transform: opacity linear 0.5s, transform 1s 2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    z-index: 1;
+}
+.notification.active{
+    opacity: 1;
+    -webkit-transform: translateY(-500px);
+    transform: translateY(-500px);
+    -ms-transform: translateY(-500px);
+}
 .overlay {
     position: absolute;
     left: 0;
