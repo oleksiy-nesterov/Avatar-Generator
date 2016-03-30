@@ -416,6 +416,11 @@ a:hover {
     transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
+#editor ul li.cursor{
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
 #editor ul li.cursor:after {
     margin-bottom: -100px;
     margin-left: -50px;
@@ -428,6 +433,10 @@ a:hover {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     z-index: 1;
+}
+#editor ul li.cursor.tap{
+    transition: none;
+    -webkit-transition: none;
 }
 #editor ul li.cursor.tap:after {
     border: 6px solid rgba(255, 0, 0, 0.2);
