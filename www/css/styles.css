@@ -93,7 +93,7 @@ a:hover {
     font-size: 20px;
     line-height: 1.2;
     border-radius: 10px;
-    border: #000 solid 5px;
+    border: #24211d solid 5px;
     opacity: 0;
     will-change: transform, opacity;
     transition: opacity linear 0.5s, -webkit-transform 1s 2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
