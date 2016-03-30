@@ -101,11 +101,8 @@
 <script type="text/javascript" src="js/avatar.js"></script>
 <script type="text/javascript">
     window.app = {init:function(){
-        alert(1);
         navigator.splashscreen && navigator.splashscreen.hide();
-        alert(2);
         window.StatusBar && window.StatusBar.show();
-        alert(3);
     }};
     window.document.addEventListener('deviceready', window.app.init, false);
 </script>
