@@ -92,7 +92,7 @@
 
     <!-- CORE PLUGINS -->
     <plugin name="cordova-plugin-device"                     source="npm" />
-    <plugin name="cordova-plugin-splashscreen"               source="npm" spec="3.0.0" />
+    <plugin name="cordova-plugin-splashscreen"               source="npm" />
     <plugin name="cordova-plugin-statusbar"                  source="npm" />
     <plugin name="cordova-plugin-whitelist"                  source="npm" spec="1.0.0" />
     <plugin name="cordova-base64-to-gallery"                 source="npm" />
