@@ -3,6 +3,7 @@ window.Avatar = (function(){
     self              = this,
     radToDeg          = 180 / Math.PI,
     degToRad          = Math.PI / 180,
+    isMobile          = /iphone|ipod|ipad|android|mobile/i.test(navigator.userAgent),
     normalizeAngle    = function(a){a = a < 0 ? 360 + a : a; return Math.abs(a >= 360 ? 0 : a);},
     getRandomKey      = function(o, range){var k = Object.keys(o); return range || k.length ? k[k.length > 1 ? Math.floor(Math.random() * (range && range < k.length ? range : k.length)) : 0] : null;},
     activateElement   = function(el, s){el = typeof(el) == 'string' ? document.getElementById(el) : el; el && el.classList[s ? 'add' : 'remove']('active');},
@@ -116,8 +117,7 @@ window.Avatar = (function(){
                     return false;
                 };
             };
-            _holder.addEventListener('touchstart', onClick);
-            _holder.addEventListener('mousedown', onClick);
+            _holder.addEventListener(isMobile ? 'touchstart' : 'mousedown', onClick);
             if(params.list && params.list.length){setOptions(params.list || []);};
             return o;
         };
@@ -258,12 +258,9 @@ window.Avatar = (function(){
             _cursor.id = 'cursor-' + _id;
             _cursor.className = 'cursor';
             _cursor.style.height = _radius + 'px';
-            _cursor.addEventListener('touchstart', onStart, true);
-            _cursor.addEventListener('mousedown', onStart, true);
-            document.addEventListener('touchmove', onMove, true);
-            document.addEventListener('mousemove', onMove, true);
-            document.addEventListener('touchend', onEnd, true);
-            document.addEventListener('mouseup', onEnd, true);
+            _cursor.addEventListener(isMobile ? 'touchstart' : 'mousedown', onStart, true);
+            document.addEventListener(isMobile ? 'touchmove' : 'mousemove', onMove, true);
+            document.addEventListener(isMobile ? 'touchend' : 'mouseup', onEnd, true);
             _holder.appendChild(_cursor);
             if(typeof(params.currentPosition) != 'undefined'){
                 o.currentPosition = params.currentPosition;
@@ -680,14 +677,11 @@ window.Avatar = (function(){
             var el = evt.currentTarget;
             window.setTimeout(function(){activateElement(el, false);}, downloadEl == el ? 500 : 100);
         };
-        document.addEventListener('touchstart', onClick, true);
-        document.addEventListener('mousedown', onClick, true);
-        interfaceEl.addEventListener('touchstart', onDeactivate, true);
-        interfaceEl.addEventListener('mousedown', onDeactivate, true);
-        moreEl.addEventListener('touchstart', onDeactivate, true);
-        moreEl.addEventListener('mousedown', onDeactivate, true);
-        downloadEl.addEventListener('touchstart', onDeactivate, true);
-        downloadEl.addEventListener('mousedown', onDeactivate, true);
+        var eName = isMobile ? 'touchstart' : 'mousedown';
+        document.addEventListener(eName, onClick, true);
+        interfaceEl.addEventListener(eName, onDeactivate, true);
+        moreEl.addEventListener(eName, onDeactivate, true);
+        downloadEl.addEventListener(eName, onDeactivate, true);
 
         _uiColors.init({
             onActive:function(option){
