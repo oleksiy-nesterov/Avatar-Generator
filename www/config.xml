@@ -70,10 +70,11 @@
     <preference name="exit-on-suspend" value="false" />
 
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenDelay" value="20000" />
+    <preference name="SplashScreenDelay" value="1000" />
     <preference name="SplashShowOnlyFirstTime" value="true" />
     <preference name="SplashScreenBackgroundColor" value="#ffffff" />
-    <preference name="FadeSplashScreenDuration" value="1000" />
+    <preference name="FadeSplashScreenDuration" value="0" />
+    <preference name="FadeSplashScreen" value="false"/>
     <preference name="ShowSplashScreenSpinner" value="false" />
 
     <preference name="EnableViewportScale" value="true" />
