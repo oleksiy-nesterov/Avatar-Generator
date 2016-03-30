@@ -679,9 +679,9 @@ window.Avatar = (function(){
         };
         var eName = isMobile ? 'touchstart' : 'mousedown';
         document.addEventListener(eName, onClick, true);
-        interfaceEl.addEventListener(eName, onDeactivate, true);
-        moreEl.addEventListener(eName, onDeactivate, true);
-        downloadEl.addEventListener(eName, onDeactivate, true);
+        interfaceEl.addEventListener('click', onDeactivate, true);
+        moreEl.addEventListener('click', onDeactivate, true);
+        downloadEl.addEventListener('click', onDeactivate, true);
 
         _uiColors.init({
             onActive:function(option){
@@ -737,7 +737,7 @@ window.Avatar = (function(){
         window.open([
             ['mailto', 'oleksiy'].join(':'), '.nesterov+',
             ['avatar', 'gmail'].join('@'), '.com'
-        ].join(''), '_blank');
+        ].join(''), window.cordova ? '_system' : '_blank');
     };
     self.moreApps = function(){
         activateElement('more', true);
