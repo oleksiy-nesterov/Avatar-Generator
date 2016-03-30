@@ -679,8 +679,8 @@ window.Avatar = (function(){
         };
         var eName = isMobile ? 'touchstart' : 'mousedown';
         document.addEventListener(eName, onClick, true);
-        interfaceEl.addEventListener('eName', onDeactivate, true);
-        downloadEl.addEventListener('eName', onDeactivate, true);
+        interfaceEl.addEventListener(eName, onDeactivate, true);
+        downloadEl.addEventListener(eName, onDeactivate, true);
         moreEl.addEventListener('click', onDeactivate, true);
 
         _uiColors.init({

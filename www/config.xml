@@ -69,12 +69,12 @@
     <preference name="stay-in-webview" value="false" />
     <preference name="exit-on-suspend" value="false" />
 
-    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
     <preference name="SplashScreenDelay" value="1000" />
     <preference name="SplashShowOnlyFirstTime" value="true" />
     <preference name="SplashScreenBackgroundColor" value="#ffffff" />
-    <preference name="FadeSplashScreenDuration" value="0" />
-    <preference name="FadeSplashScreen" value="false"/>
+    <preference name="FadeSplashScreenDuration" value="500" />
+    <preference name="FadeSplashScreen" value="true"/>
     <preference name="ShowSplashScreenSpinner" value="false" />
 
     <preference name="EnableViewportScale" value="true" />
@@ -86,23 +86,15 @@
     <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <feature name="Keyboard"><param name="ios-package" value="CDVKeyboard" onload="true" /></feature>
 
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarStyle" value="black-opaque" />
-    <preference name="StatusBarBackgroundColor" value="#ffffff" />
-    <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
-
     <!-- CORE PLUGINS -->
     <plugin name="cordova-plugin-device"                     source="npm" />
     <plugin name="cordova-plugin-splashscreen"               source="npm" />
-    <plugin name="cordova-plugin-statusbar"                  source="npm" />
     <plugin name="cordova-plugin-whitelist"                  source="npm" spec="1.0.0" />
     <plugin name="cordova-base64-to-gallery"                 source="npm" />
     <plugin name="cordova-plugin-inappbrowser"               source="npm" />
     <plugin name="org.crosswalk.engine"                      source="pgb" />
 
     <!-- CONFIGS -->
-    <config-file platform="ios" parent="UIStatusBarHidden" overwrite="true"><true /></config-file>
-    <config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true"><false /></config-file>
     <config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file>
     <!--config-file platform="ios" parent="CFBundleShortVersionString"><string>0.0.0</string></config-file -->
     <!--config-file platform="ios" parent="CFBundleVersion"><string>0.0.0</string></config-file -->
