@@ -92,7 +92,7 @@ window.Avatar = (function(){
             el.dataset.value = value;
             el.className = ['option', _class].join(' ');
             el.style.height = parseInt(window.getComputedStyle(_holder.parentElement, null).getPropertyValue('height'), 10) / 2 + 'px';
-            el.style.transform = el.style.webkitTransform = el.style.msTransform = 'rotateZ(' + angle + 'deg)';
+            el.style.transform = el.style.webkitTransform = el.style.msTransform = 'rotateZ(' + angle + 'deg) translateZ(0)';
             data = {angle:angle, position:pos, value:value, element:el};
             _allOptions[angle] = data;
             _holder.appendChild(el);
