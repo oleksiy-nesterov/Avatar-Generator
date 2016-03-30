@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'self' 'unsafe-inline' 'unsafe-eval'; script-src * 'self' 'unsafe-inline' 'unsafe-eval'; img-src * cdvfile: content: data: blob:; media-src * cdvfile: content: data: blob:;">    
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'self' 'unsafe-inline' 'unsafe-eval'; script-src * 'self' 'unsafe-inline' 'unsafe-eval'; img-src * cdvfile: content: data: blob:; media-src * cdvfile: content: data: blob:;">
     <meta name="description" content="The Avatar Generator. Allow you generate your own avatar." />
     <meta name="keywords" content="avatar,generator,maker" />
     <meta name="author" content="Oleksiy Nesterov" />
@@ -101,9 +101,11 @@
 <script type="text/javascript" src="js/avatar.js"></script>
 <script type="text/javascript">
     window.app = {init:function(){
+        alert(1);
         window.navigator.splashscreen && window.navigator.splashscreen.hide();
         window.StatusBar && window.StatusBar.show();
     }};
+    window.document.addEventListener('deviceready', window.app.init, false);
 </script>
-<script type="text/javascript" src="phonegap.js" onerror="window.app.init();" onload="document.addEventListener('deviceready',window.app.init,false);"></script>
+<script type="text/javascript" src="phonegap.js" onerror="window.app.init();"></script>
 </html>
