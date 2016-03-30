@@ -25,7 +25,7 @@ body {
 a {
     text-decoration: none;
     color: #000000;
-    -webkit-tap-highlight-color: transparent;
+    -webkitf-highlight-color: transparent;
 }
 a:hover {
     color: #000000;
@@ -358,19 +358,35 @@ a:hover {
 }
 #editor ul li.option:after {
     margin-bottom: -14px;
-    margin-left: -10px;
+    margin-left: -11px;
     width: 10px;
     height: 10px;
     background-color: #24211d;
-    border: 5px solid #fff;
+    border: 6px solid #fff;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     will-change: background-color;
     transition: background-color 0.3s ease;
     -webkit-transition: background-color 0.3s ease;
 }
+#editor ul li.option:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    width: 50px;
+    background-color: rgba(255, 255, 255, 0.01);
+    margin-left: -25px;
+    margin-bottom: -28px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
 #editor ul li.option.active:after {
     background-color: #eb3d00;
+}
+#editor ul li.option.tap:before {
+    background-color: rgba(255, 0, 0, 0.2);
 }
 #editor ul li.option.color:after {
     background-color: inherit;
@@ -385,6 +401,9 @@ a:hover {
     -webkit-box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.1);
     will-change: transform;
     overflow: hidden;
+}
+#editor ul li.option.color:before {
+    display: none;
 }
 #editor ul li.option.color.active:after {
     -ms-transform-origin: center center;
@@ -410,8 +429,9 @@ a:hover {
     -webkit-box-sizing: border-box;
     z-index: 1;
 }
-#editor ul li.cursor.cursor-tap:after {
-    border:10px solid rgba(255, 0, 0, 0.05);
+#editor ul li.cursor.tap:after {
+    border: 6px solid rgba(255, 0, 0, 0.2);
+    margin-bottom: -115px;
 }
 #editor-shadow {
     background: transparent url(../img/bg.png) no-repeat center bottom;

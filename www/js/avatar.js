@@ -112,6 +112,8 @@ window.Avatar = (function(){
             var onClick = function(evt){
                 if(evt.target.parentElement == _holder && typeof(evt.target.dataset.angle) != 'undefined'){
                     o.currentAngle = evt.target.dataset.angle;
+                    evt.target.classList.add('tap');
+                    window.setTimeout(function(){evt.target.classList.remove('tap');}, 500);
                     evt.stopPropagation();
                     evt.preventDefault();
                     return false;
@@ -219,7 +221,7 @@ window.Avatar = (function(){
             var e = getEvent(evt), rect = _holder.parentElement.getBoundingClientRect();
             _data = {y1:rect.top + rect.height / 2, y2:rect.top + rect.height};
             _data.x1 = _data.x2 = rect.left + rect.width / 2;
-            _cursor.classList.add('cursor-tap');
+            _cursor.classList.add('tap');
         },
         onMove = function(evt){
             if(!_data){return;};
@@ -239,7 +241,7 @@ window.Avatar = (function(){
             if(!_data || !_data.moved){return;};
             o.currentAngle = getAngleByVector(_data.x1, _data.y1, _data.x2, _data.y2);
             _data = null;
-            _cursor.classList.remove('cursor-tap');
+            _cursor.classList.remove('tap');
         };
 
         o.init = function(params){
