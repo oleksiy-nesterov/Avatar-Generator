@@ -338,16 +338,20 @@ a:hover {
     top: 50%;
     width: 0;
     height: 0;
+    font-size: 0;
+    line-height: 0;
 }
 #editor ul li {
     position: absolute;
     top: 50%;
     left: 50%;
     bottom: 0;
-    width: 0;
+    width: 2px;
     -ms-transform-origin: top center;
     transform-origin: top center;
     -webkit-transform-origin: top center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 #editor ul li:after {
     content: '';
@@ -357,7 +361,7 @@ a:hover {
     cursor: pointer;
 }
 #editor ul li.option:after {
-    margin-bottom: -14px;
+    margin-bottom: -15px;
     margin-left: -11px;
     width: 10px;
     height: 10px;
@@ -389,7 +393,7 @@ a:hover {
     background-color: rgba(255, 0, 0, 0.2);
 }
 #editor ul li.option.color:after {
-    background-color: inherit;
+    background-color: currentColor;
     border: 0;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -417,6 +421,7 @@ a:hover {
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 #editor ul li.cursor{
+    will-change: transform;
     transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
