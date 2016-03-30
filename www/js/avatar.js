@@ -4,7 +4,7 @@ window.Avatar = (function(){
     radToDeg          = 180 / Math.PI,
     degToRad          = Math.PI / 180,
     isMobile          = /iphone|ipod|ipad|android|mobile/i.test(navigator.userAgent),
-    normalizeAngle    = function(a){a = a < 0 ? 360 + a : a; return Math.abs(a >= 360 ? 0 : a);},
+    normalizeAngle    = function(a){a = a < 0 ? 360 + a : a; return Math.abs(a > 360 ? 0 : a);},
     getRandomKey      = function(o, range){var k = Object.keys(o); return range || k.length ? k[k.length > 1 ? Math.floor(Math.random() * (range && range < k.length ? range : k.length)) : 0] : null;},
     activateElement   = function(el, s){el = typeof(el) == 'string' ? document.getElementById(el) : el; el && el.classList[s ? 'add' : 'remove']('active');},
     notification      = function(html){

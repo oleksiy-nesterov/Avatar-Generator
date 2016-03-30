@@ -417,7 +417,6 @@ a:hover {
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 #editor ul li.cursor{
-    will-change: transform;
     transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
