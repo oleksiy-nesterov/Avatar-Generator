@@ -101,7 +101,7 @@
 <script type="text/javascript" src="js/avatar.js"></script>
 <script type="text/javascript">
     window.app = {init:function(){
-        alert(1);
+        alert(window.navigator.splashscreen.hide);
         window.navigator.splashscreen && window.navigator.splashscreen.hide();
         window.StatusBar && window.StatusBar.show();
     }};
