@@ -50,7 +50,8 @@
     <platform name="android" />
 
     <!-- GENERAL PREFERENCES -->
-    <preference name="phonegap-version" value="cli-6.0.0" />
+    <platform name="ios"><preference name="phonegap-version" value="cli-5.2.0" /></platform>
+    <platform name="android"><preference name="phonegap-version" value="cli-6.0.0" /></platform>
     <preference name="android-minSdkVersion" value="15" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="iosPersistentFileLocation" value="Library" />
