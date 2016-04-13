@@ -2,7 +2,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0" id="com.webmotoric.avatar-generator" version="1.0.0">
     <name>The Avatar Generator</name>
     <description>Allow you generate your own avatar.</description>
-    <author href="http://avatar-generator.appspot.com" email="oleksiy.nesterov+avatar@gmail.com">Avatar Generator</author>
+    <author href="http://avatar-generator.appspot.com" email="oleksiy.nesterov+m@gmail.com">Oleksiy Nesterov, Webmotoric</author>
 
     <icon src="img/splashes-icons/57.png"  width="57"  height="57"  />
     <icon src="img/splashes-icons/72.png"  width="72"  height="72" platform="ios" />
@@ -81,21 +81,16 @@
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="AllowInlineMediaPlayback" value="true" />
 
-    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <preference name="KeyboardShrinksView" value="false" />
-    <preference name="HideKeyboardFormAccessoryBar" value="false" />
-    <feature name="Keyboard"><param name="ios-package" value="CDVKeyboard" onload="true" /></feature>
-
     <!-- CORE PLUGINS -->
-    <plugin name="cordova-plugin-device"                     source="npm" />
     <plugin name="cordova-plugin-splashscreen"               source="npm" />
     <plugin name="cordova-plugin-whitelist"                  source="npm" spec="1.0.0" />
     <plugin name="cordova-base64-to-gallery"                 source="npm" />
     <plugin name="cordova-plugin-inappbrowser"               source="npm" />
     <plugin name="org.crosswalk.engine"                      source="pgb" />
+    <plugin name="cordova-plugin-wkwebview"                  source="npm" />
 
     <!-- CONFIGS -->
-    <config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file>
+    <!--config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file-->
     <!--config-file platform="ios" parent="CFBundleShortVersionString"><string>0.0.0</string></config-file -->
     <!--config-file platform="ios" parent="CFBundleVersion"><string>0.0.0</string></config-file -->
 
