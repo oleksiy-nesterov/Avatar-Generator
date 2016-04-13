@@ -728,12 +728,12 @@ window.Avatar = (function(){
     self.saveToAlbum = function(dataUrl){
         if(window.cordova && window.cordova.base64ToGallery){
             var save = function(){
-                cordova.base64ToGallery(
+                window.cordova.base64ToGallery(
                     dataUrl,
-                    'avatar_',
+                    {prefix:'avatar_'},
                     function(){notification('Avatar has been saved into album.');},
                     function(){notification('Save. Something went wrong.');}
-                );
+                )
             };
             if(/android/i.test(navigator.userAgent) && window.cordova.plugins && window.cordova.plugins.diagnostic){
                 window.cordova.plugins.diagnostic.requestRuntimePermission(
