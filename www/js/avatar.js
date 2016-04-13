@@ -730,7 +730,7 @@ window.Avatar = (function(){
             var save = function(){
                 window.cordova.base64ToGallery(
                     dataUrl,
-                    {prefix:'avatar_'},
+                    'avatar_',
                     function(){notification('Avatar has been saved into album.');},
                     function(){notification('Save. Something went wrong.');}
                 )
