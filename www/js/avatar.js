@@ -727,12 +727,23 @@ window.Avatar = (function(){
     };
     self.saveToAlbum = function(dataUrl){
         if(window.cordova && window.cordova.base64ToGallery){
-            cordova.base64ToGallery(
-                dataUrl,
-                'avatar_',
-                function(){notification('Avatar has been saved into album.');},
-                function(){}
-            );
+            var save = function(){
+                cordova.base64ToGallery(
+                    dataUrl,
+                    'avatar_',
+                    function(){notification('Avatar has been saved into album.');},
+                    function(){notification('Save. Something went wrong.');}
+                );
+            };
+            if(/android/i.test(navigator.userAgent) && window.cordova.plugins && window.cordova.plugins.diagnostic){
+                window.cordova.plugins.diagnostic.requestRuntimePermission(
+                    function(granted){granted ? save() : notification('Permission not granted for the requested operation.');},
+                    function(){notification('Permission. Something went wrong.');},
+                    window.cordova.plugins.diagnostic.runtimePermission.WRITE_EXTERNAL_STORAGE
+                );
+            }else{
+                save();
+            };
         };
     };
     self.contactMe = function(){
