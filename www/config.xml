@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0" id="com.webmotoric.avatar-generator" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0" id="com.webmotoric.avatar-generator" version="1.0.1">
     <name>The Avatar Generator</name>
     <description>App allows you generate your own user picture.</description>
     <author href="http://avatar-generator.appspot.com" email="oleksiy.nesterov+m@gmail.com">Oleksiy Nesterov, Webmotoric</author>
