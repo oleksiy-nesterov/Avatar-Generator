@@ -81,7 +81,6 @@
     <preference name="EnableViewportScale" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="AllowInlineMediaPlayback" value="true" />
-    <preference name="android-build-tool" value="gradle" />
 
     <!-- CORE PLUGINS -->
     <plugin name="cordova-plugin-splashscreen"               source="npm" />
@@ -89,14 +88,17 @@
     <plugin name="cordova-base64-to-gallery"                 source="npm" spec="3.0.0" />
     <plugin name="cordova.plugins.diagnostic"                source="npm" />
     <plugin name="cordova-plugin-inappbrowser"               source="npm" />
-    <plugin name="org.crosswalk.engine"                      source="pgb" />
-    <!--plugin name="cordova-plugin-wkwebview"                  source="npm" /-->
+    <plugin name="cordova-plugin-wkwebview"                  source="npm" />
+    <!--plugin name="org.crosswalk.engine"                      source="pgb" /-->
     <plugin name="cordova-plugin-crosswalk-webview"          source="npm" spec="1.5.0" />
 
     <!-- CONFIGS -->
     <!--config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file-->
     <!--config-file platform="ios" parent="CFBundleShortVersionString"><string>0.0.0</string></config-file -->
     <!--config-file platform="ios" parent="CFBundleVersion"><string>0.0.0</string></config-file -->
+    <config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file>
+    <config-file platform="android" parent="/manifest"><application android:hardwareAccelerated="true"></application></config-file>
+   
 
     <allow-intent href="*" />
     <allow-navigation href="*" />
