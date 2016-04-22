@@ -89,7 +89,8 @@
     <plugin name="cordova.plugins.diagnostic"                source="npm" />
     <plugin name="cordova-plugin-inappbrowser"               source="npm" />
     <plugin name="org.crosswalk.engine"                      source="pgb" />
-    <plugin name="cordova-plugin-wkwebview"                  source="npm" />
+    <!--plugin name="cordova-plugin-wkwebview"                  source="npm" /-->
+    <plugin name="cordova-plugin-crosswalk-webview"          source="npm" spec="1.5.0" />
 
     <!-- CONFIGS -->
     <!--config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file-->
