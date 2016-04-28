@@ -17,9 +17,9 @@ handlers:
   
 - url: /(.*\.(gif|png|jpg|ico))
   static_files: \1
-  upload: .*\.(gif|png|jpg|ico)  
-
-- url: /.*
+  upload: .*\.(gif|png|jpg|ico)
+  
+- url: (/$)|(/index.html)
   script: index.html
   
 skip_files:
