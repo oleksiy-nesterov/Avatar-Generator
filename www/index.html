@@ -105,6 +105,12 @@
     window.app = {init:function(){
         var viewport = document.querySelector('meta[name=viewport]');
         viewport && viewport.setAttribute('content', 'width=640,user-scalable=no');
+        if(window.StatusBar){
+            window.StatusBar.styleDefault();
+            window.StatusBar.backgroundColorByHexString('#ffffff');
+            window.StatusBar.show();
+            window.StatusBar.overlaysWebView(false);
+        }
     }};
     window.document.addEventListener('deviceready', window.app.init, false);
 </script>
