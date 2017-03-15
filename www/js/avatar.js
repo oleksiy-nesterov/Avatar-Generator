@@ -585,14 +585,16 @@ window.Avatar = (function(){
     self.drawSchema = function(s, callback){
         s = s || self.schema;
         var result = self.schemaToAssets(s); if(!result){return false;};
-        storage.save('avatarSchema', s, true)
+        storage.save('avatarSchema', s, true);
         var x, c = document.createElement('canvas'); c.width = 480; c.height = 480;
         x = c.getContext('2d');
         var counter = 0, images = [];
         var addImage = function(src){
+            alert('start: ' + src);
             var img = new Image(); images.push(img);
             img.crossorigin = ''; //start Chrome width --allow-file-access-from-files
             img.onload = function(){
+                alert('done: ' + src);
                 counter++;
                 if(counter >= images.length){
                     for(var i = 0; i < images.length; i++){x.drawImage(images[i], 0, 0);};
@@ -654,21 +656,17 @@ window.Avatar = (function(){
                 case 'interface-random'      : self.randomSchema(); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
-                    alert(1);
                     var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
-                    alert(2);
                     if(window.cordova && window.cordova.base64ToGallery){
-                        alert(3);
                         el.href = 'javascript:void(0)';
                         el.removeAttribute('download');
                         el.onclick = function(){Avatar.saveToAlbum(dataUrl);}
-                        alert(4);
                     }else{
                         el.href = dataUrl;
                         el.download = 'avatar.png';
                         el.onclick = function(){notification('The download will start within second.');}
                     };
-                    window.setTimeout(function(){alert(6); activateElement(_downloadLayerId, true);}, 100);
+                    window.setTimeout(function(){activateElement(_downloadLayerId, true);}, 100);
                 }); break;
             };
             if(evt.target.id == 'interface-download'){return;};
