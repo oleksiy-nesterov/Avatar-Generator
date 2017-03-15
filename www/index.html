@@ -106,7 +106,8 @@
         var viewport = document.querySelector('meta[name=viewport]');
         viewport && viewport.setAttribute('content', 'width=640,user-scalable=no');
         if(window.StatusBar){
-            window.StatusBar.backgroundColorByHexString('#ffffff');
+            window.StatusBar.styleLightContent();
+            window.StatusBar.backgroundColorByHexString('#ff4242');
             window.StatusBar.show();
             window.StatusBar.overlaysWebView(false);
         }
