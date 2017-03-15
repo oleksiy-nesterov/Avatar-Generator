@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="83px" height="83px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 120 120"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+    .fil1 {fill:#2B2A29}
+   ]]>
+  </style>
+ </defs>
+ <g>
+  <circle class="fil0" cx="60" cy="60" r="60"/>
+  <g>
+   <path class="fil1" d="M38 68l0 1c0,2 2,3 4,3 4,0 5,-6 7,-9 0,7 0,14 0,20 0,6 -1,17 4,17l1 0c5,0 4,-5 4,-9 0,-5 0,-9 0,-14 1,0 1,0 1,0l2 0c0,0 1,0 1,1 0,4 0,8 0,13 0,4 0,9 4,9l1 0c6,0 4,-11 4,-17 0,-6 0,-13 0,-20 2,2 3,9 7,9l0 0c2,0 4,-2 4,-3l0 -1c0,-1 -6,-11 -6,-13 -2,-3 -5,-11 -9,-11l-14 0c-4,0 -6,8 -8,11 -1,1 -7,12 -7,13z"/>
+   <path class="fil1" d="M50 30l0 1c0,4 5,9 9,9l1 0c5,0 10,-5 10,-10l0 0c0,-5 -5,-10 -10,-10l-1 0c-4,0 -9,5 -9,10z"/>
+  </g>
+ </g>
+</svg>
+
+

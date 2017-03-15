@@ -11,7 +11,11 @@ window.Avatar = (function(){
         var div = document.createElement('DIV'); div.className = 'notification'; div.innerHTML = html; document.body.appendChild(div);
         window.setTimeout(function(){div.classList.add('active');}, 100);
         window.setTimeout(function(){document.body.removeChild(div)}, 5000);
-    };
+    },
+    passiveEventsOptions = true;
+    try{window.addEventListener('test', null, Object.defineProperty({}, 'passive', {get:function(){
+        passiveEventsOptions = {passive:true};
+    }}));}catch(e){};    
 
     storage = (function(){
         var o = this;
@@ -115,11 +119,11 @@ window.Avatar = (function(){
                     evt.target.classList.add('tap');
                     window.setTimeout(function(){evt.target.classList.remove('tap');}, 500);
                     evt.stopPropagation();
-                    evt.preventDefault();
+                    //evt.preventDefault();
                     return false;
                 };
             };
-            _holder.addEventListener(isMobile ? 'touchstart' : 'mousedown', onClick);
+            _holder.addEventListener(isMobile ? 'touchstart' : 'mousedown', onClick, passiveEventsOptions);
             if(params.list && params.list.length){setOptions(params.list || []);};
             return o;
         };
@@ -234,7 +238,7 @@ window.Avatar = (function(){
             d = getDistanceByAngle(_radius, _radius, a - ra);
             d < _snapDistance && (o.currentAngle = a);
             evt.stopPropagation();
-            evt.preventDefault();
+            //evt.preventDefault();
             return false;
         },
         onEnd = function(evt){
@@ -260,8 +264,8 @@ window.Avatar = (function(){
             _cursor.id = 'cursor-' + _id;
             _cursor.className = 'cursor';
             _cursor.style.height = _radius + 'px';
-            _cursor.addEventListener(isMobile ? 'touchstart' : 'mousedown', onStart, true);
-            document.addEventListener(isMobile ? 'touchmove' : 'mousemove', onMove, true);
+            _cursor.addEventListener(isMobile ? 'touchstart' : 'mousedown', onStart, passiveEventsOptions);
+            document.addEventListener(isMobile ? 'touchmove' : 'mousemove', onMove, passiveEventsOptions);
             document.addEventListener(isMobile ? 'touchend' : 'mouseup', onEnd, true);
             _holder.appendChild(_cursor);
             if(typeof(params.currentPosition) != 'undefined'){
@@ -672,7 +676,7 @@ window.Avatar = (function(){
                 };
             };
             evt.stopPropagation();
-            evt.preventDefault();
+            //evt.preventDefault();
             return false;
         },
         onDeactivate = function(evt){
@@ -680,9 +684,9 @@ window.Avatar = (function(){
             window.setTimeout(function(){activateElement(el, false);}, downloadEl == el ? 500 : 100);
         };
         var eName = isMobile ? 'touchstart' : 'mousedown';
-        document.addEventListener(eName, onClick, true);
-        interfaceEl.addEventListener(eName, onDeactivate, true);
-        downloadEl.addEventListener(eName, onDeactivate, true);
+        document.addEventListener(eName, onClick, passiveEventsOptions);
+        interfaceEl.addEventListener(eName, onDeactivate, passiveEventsOptions);
+        downloadEl.addEventListener(eName, onDeactivate, passiveEventsOptions);
         moreEl.addEventListener('click', onDeactivate, true);
 
         _uiColors.init({
@@ -746,11 +750,13 @@ window.Avatar = (function(){
             };
         };
     };
-    self.contactMe = function(){
-        window.open([
-            ['mailto', 'oleksiy'].join(':'), '.nesterov+',
-            ['avatar', 'gmail'].join('@'), '.com'
-        ].join(''), window.cordova ? '_system' : '_blank');
+    self.contactMe = function(element){
+        var mail = ['oleksiy.nesterov', '+', [].join.apply(['avatar', 'gmail'], ['@']), '.com'].join('');
+        if(element && !window.cordova){
+           element.innerHTML = mail; 
+        }else{
+            window.open('mailto:' + mail, window.cordova ? '_system' : '_blank');
+        };
     };
     self.moreApps = function(){
         activateElement('more', true);

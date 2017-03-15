@@ -451,51 +451,59 @@ a:hover {
 }
 #interface-hair,
 .interface-hair {
-    background-image: url(../img/btn-hair.png);
+    background-image: url(../img/btn-hair.svg);
 }
 #interface-eyebrows,
 .interface-eyebrows {
-    background-image: url(../img/btn-eyebrows.png);
+    background-image: url(../img/btn-eyebrows.svg);
 }
 #interface-eyes,
 .interface-eyes {
-    background-image: url(../img/btn-eyes.png);
+    background-image: url(../img/btn-eyes.svg);
 }
 #interface-mouth,
 .interface-mouth {
-    background-image: url(../img/btn-mouth.png);
+    background-image: url(../img/btn-mouth.svg);
 }
 #interface-mustache,
 .interface-mustache {
-    background-image: url(../img/btn-mustache.png);
+    background-image: url(../img/btn-mustache.svg);
 }
 #interface-nose,
 .interface-nose {
-    background-image: url(../img/btn-nose.png);
+    background-image: url(../img/btn-nose.svg);
 }
 #interface-ears,
 .interface-ears {
-    background-image: url(../img/btn-ears.png);
+    background-image: url(../img/btn-ears.svg);
 }
 #interface-race,
 .interface-race {
-    background-image: url(../img/btn-race.png);
+    background-image: url(../img/btn-race.svg);
 }
 #interface-clothes,
 .interface-clothes {
-    background-image: url(../img/btn-clothes.png);
+    background-image: url(../img/btn-clothes.svg);
 }
 #interface-beard,
 .interface-beard {
-    background-image: url(../img/btn-beard.png);
+    background-image: url(../img/btn-beard.svg);
+}
+#interface-background,
+.interface-background {
+    background-image: url(../img/btn-background.svg);
+}
+#interface-accessories,
+.interface-accessories {
+    background-image: url(../img/btn-accessories.svg);
 }
 #interface-save,
 .interface-save {
-    background-image: url(../img/btn-save.png);
+    background-image: url(../img/btn-save.svg);
 }
 #interface-download,
 .interface-download {
-    background-image: url(../img/btn-download.png);
+    background-image: url(../img/btn-download.svg);
 }
 #interface-download.interact,
 .interface-download .interact{
@@ -504,23 +512,15 @@ a:hover {
 }
 #interface-random,
 .interface-random {
-    background-image: url(../img/btn-random.png);
+    background-image: url(../img/btn-random.svg);
 }
 #interface-female,
 .interface-female {
-    background-image: url(../img/btn-female.png);
+    background-image: url(../img/btn-female.svg);
 }
 #interface-male,
 .interface-male {
-    background-image: url(../img/btn-male.png);
-}
-#interface-background,
-.interface-background {
-    background-image: url(../img/btn-background.png);
-}
-#interface-accessories,
-.interface-accessories {
-    background-image: url(../img/btn-accessories.png);
+    background-image: url(../img/btn-male.svg);
 }
 #interface-pipuzzle,
 .interface-pipuzzle {

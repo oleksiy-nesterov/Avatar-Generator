@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="115px" height="115px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1126 1126"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+    .fil2 {fill:#FEFEFE}
+    .fil1 {fill:#2B2A29}
+    .fil3 {fill:#FF4242}
+   ]]>
+  </style>
+ </defs>
+ <g>
+  <circle class="fil0" cx="563" cy="563" r="563"/>
+  <g>
+   <path class="fil1" d="M708 793c82,38 147,107 178,194l10 26 -23 16c-92,63 -199,97 -310,97 -111,0 -219,-34 -310,-97l-24 -16 10 -26c32,-87 97,-156 178,-194 -92,-43 -162,-126 -188,-226 -40,-9 -70,-44 -70,-87 0,-38 25,-71 60,-83 4,-84 40,-164 100,-225 65,-64 152,-100 244,-100 91,0 179,36 243,100 61,61 96,141 101,225 34,12 60,45 60,83 0,43 -31,78 -71,87 -26,100 -96,183 -188,226z"/>
+   <g>
+    <circle class="fil2" cx="247" cy="482" r="51"/>
+    <circle class="fil2" cx="879" cy="482" r="51"/>
+   </g>
+   <path class="fil3" d="M563 645c24,0 46,6 67,17 -7,37 -31,80 -10,129 21,50 74,97 56,135 -18,37 -73,59 -113,59 -41,0 -95,-22 -114,-59 -18,-38 36,-85 57,-135 21,-49 -4,-92 -10,-129 20,-11 43,-17 67,-17z"/>
+   <circle class="fil3" cx="563" cy="482" r="308"/>
+   <path class="fil2" d="M563 985c-41,0 -95,-22 -114,-59 -16,-35 26,-76 50,-121 -104,22 -190,97 -226,196 83,57 182,90 290,90 107,0 207,-33 289,-90 -36,-99 -121,-174 -225,-196 23,45 66,86 49,121 -18,37 -73,59 -113,59z"/>
+   <path class="fil2" d="M563 109c85,0 162,35 218,91 55,55 90,132 90,217 0,18 -2,36 -5,53 -24,-146 -187,-306 -308,-213 -132,100 -274,67 -299,213 -3,-17 -4,-35 -4,-53 0,-85 34,-162 90,-217 56,-56 133,-91 218,-91z"/>
+  </g>
+ </g>
+</svg>
+
+

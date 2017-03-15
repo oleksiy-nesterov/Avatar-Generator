@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="83px" height="83px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 366 366"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+    .fil1 {fill:#2B2A29}
+   ]]>
+  </style>
+ </defs>
+ <g>
+  <circle class="fil0" cx="183" cy="183" r="183"/>
+  <path class="fil1" d="M113 97l33 0 0 58c0,3 3,6 5,6l71 0c3,0 5,-3 5,-6l0 -58 15 0 22 23 0 137c0,6 -5,11 -11,11l-140 0c-7,0 -12,-5 -12,-11l0 -148c0,-7 5,-12 12,-12zm12 77l116 0c2,0 5,2 5,5l0 63c0,3 -3,5 -5,5l-116 0c-3,0 -5,-2 -5,-5l0 -63c0,-3 2,-5 5,-5zm85 -77l-26 0 0 45 26 0 0 -45z"/>
+ </g>
+</svg>
+
+
