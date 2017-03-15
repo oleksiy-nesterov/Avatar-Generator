@@ -8,7 +8,10 @@
     <meta name="author" content="Oleksiy Nesterov, Webmotoric" />
     <meta name="copyright" content="Oleksiy Nesterov, Webmotoric" />
 
-    <meta name="viewport" content="width=640 user-scalable=no" />
+    <meta name="MobileOptimized" content="640" />
+    <style type="text/css">@viewport{width:640px;user-zoom:fixed;}</style>
+    <meta name="viewport" content="width=640" />
+    
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <!-- meta name="apple-itunes-app" content="app-id=XXXXXXXXX" / -->
@@ -16,7 +19,6 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="HandheldFriendly" content="true" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="MobileOptimized" content="640" />
 
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="shortcut" type="image/png" href="icon.png" />
@@ -101,7 +103,8 @@
 <script type="text/javascript" src="js/avatar-min.js"></script>
 <script type="text/javascript">
     window.app = {init:function(){
-        //...
+        var viewport = document.querySelector('meta[name=viewport]');
+        viewport && viewport.setAttribute('content', 'width=640,user-scalable=no');
     }};
     window.document.addEventListener('deviceready', window.app.init, false);
 </script>

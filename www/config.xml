@@ -51,6 +51,8 @@
 
     <!-- GENERAL PREFERENCES -->
     <preference name="phonegap-version"                value="cli-6.5.0" />
+    <preference name="android-minSdkVersion"           value="16" />
+    <preference name="android-targetSdkVersion"        value="23" />
     <preference name="AndroidPersistentFileLocation"   value="Internal" />
     <preference name="iosPersistentFileLocation"       value="Library" />
     <preference name="android-build-tool"              value="gradle" />
@@ -96,7 +98,7 @@
     
     <platform name="android">
         <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.1" source="git" />
-        <plugin name="cordova-plugin-crosswalk-webview" source="npm" />
+        <plugin name="cordova-plugin-crosswalk-webview" source="npm" version="2.3.0" />
         <!-- preference name="buildArchitecture" value="x86" / -->
         <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
         <preference name="xwalkCommandLine" value="--disable-gesture-requirement-for-media-playback" />

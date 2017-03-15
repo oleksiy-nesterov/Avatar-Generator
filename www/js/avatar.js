@@ -144,7 +144,7 @@ window.Avatar = (function(){
             return o;
         };
         o.tick = function(){
-            if(_audio){_audio.stop(); _audio.play();};
+            if(_audio){_audio.play();};
             return o;
         };
         o.rotate = function(angle){
