@@ -95,11 +95,10 @@
     <plugin name="cordova-plugin-statusbar"            source="npm" spec="2.2.0" />
     <plugin name="cordova.plugins.diagnostic"          source="npm" />
     <plugin name="cordova-plugin-inappbrowser"         source="npm" />
-    <plugin name="cordova-plugin-crosswalk-webview"    source="npm" />
     
     <!-- WKWEBVIEW -->
     <platform name="ios">
-        <plugin name="cordova-plugin-wkwebview" source="npm" spec="1.1.1" />
+        <plugin name="cordova-plugin-wkwebview" source="npm" />
         <feature name="CDVWKWebViewEngine"><param name="ios-package" value="CDVWKWebViewEngine" /></feature>
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     </platform>
