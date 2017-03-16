@@ -655,9 +655,13 @@ window.Avatar = (function(){
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
                     try{
-                        var dataUrl = c.toDataURL('image/png'), el = document.getElementById(_interfaceId + '-download');
+                        alert(c.toDataURL);
+                        var dataUrl = c.toDataURL('image/png');
+                        alert(2);
+                        var el = document.getElementById(_interfaceId + '-download');
+                        alert(3);
                     }catch(e){
-                        alert(e);
+                        alert(4);
                         alert(e.message);
                     }
                     if(window.cordova && window.cordova.base64ToGallery){
