@@ -654,8 +654,7 @@ window.Avatar = (function(){
                 case 'interface-random'      : self.randomSchema(); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
-                    alert(c.toDataURL('image/png'));
-                    
+                    alert(c);
                     var dataUrl = c.toDataURL('image/png'), el = document.getElementById(_interfaceId + '-download');
                     if(window.cordova && window.cordova.base64ToGallery){
                         el.href = 'javascript:void(0)';
