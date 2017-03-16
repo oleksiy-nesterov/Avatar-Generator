@@ -98,6 +98,7 @@
     
     <!-- WKWEBVIEW -->
     <platform name="ios">
+        <plugin name="cordova-plugin-transport-security" source="npm" />
         <plugin name="cordova-plugin-wkwebview-engine" source="npm" />
         <feature name="CDVWKWebViewEngine"><param name="ios-package" value="CDVWKWebViewEngine" /></feature>
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
