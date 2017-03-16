@@ -655,6 +655,7 @@ window.Avatar = (function(){
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
                     try{
+                        alert(1);
                         alert(c.toDataURL);
                         var dataUrl = c.toDataURL('image/png');
                         alert(2);
