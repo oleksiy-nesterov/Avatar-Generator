@@ -111,10 +111,10 @@
         <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.1" source="git" />
         <plugin name="cordova-plugin-crosswalk-webview" source="npm" version="2.3.0" />
         <preference name="buildArchitecture" value="arm" />
-        <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
-        <preference name="xwalkCommandLine" value="--disable-gesture-requirement-for-media-playback" />
-        <preference name="xwalkCommandLine" value="--ignore-gpu-blacklist" />
-        <preference name="xwalkCommandLine" value="--force-gpu-rasterization" />
+        <preference name="xwalkCommandLine" value="- -disable-pull-to-refresh-effect" />
+        <preference name="xwalkCommandLine" value="- -disable-gesture-requirement-for-media-playback" />
+        <preference name="xwalkCommandLine" value="- -ignore-gpu-blacklist" />
+        <preference name="xwalkCommandLine" value="- -force-gpu-rasterization" />
         <preference name="xwalkVersion" value="19+" />
     </platform>
     -->
