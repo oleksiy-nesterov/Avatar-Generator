@@ -93,8 +93,6 @@
     <plugin name="cordova.plugins.diagnostic"           source="npm" />
     <plugin name="cordova-plugin-inappbrowser"          source="npm" />
     
-    <plugin name="cordova-plugin-viewport"              source="npm" />
-    
     <platform name="ios" />
     <platform name="android" />
     
