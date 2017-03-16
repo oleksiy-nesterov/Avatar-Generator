@@ -591,7 +591,8 @@ window.Avatar = (function(){
         var counter = 0, images = [];
         var addImage = function(src){
             var img = new Image(); images.push(img);
-            img.setAttribute('crossOrigin', 'anonymous'); //start Chrome width --allow-file-access-from-files
+            //img.setAttribute('crossOrigin', 'anonymous'); //start Chrome width --allow-file-access-from-files
+            img.crossorigin = 'anonymous'; 
             img.onload = function(){
                 counter++;
                 if(counter >= images.length){
@@ -656,6 +657,7 @@ window.Avatar = (function(){
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
                     alert(1);
                     try{
+                        alert(c.toDataURL);
                         var dataUrl = c.toDataURL('image/png');
                         alert(2);
                         var el = document.getElementById(_interfaceId + '-download');
