@@ -92,6 +92,7 @@
     <plugin name="cordova-plugin-statusbar"             source="npm" spec="2.2.0" />
     <plugin name="cordova.plugins.diagnostic"           source="npm" />
     <plugin name="cordova-plugin-inappbrowser"          source="npm" />
+    <plugin name="viewport_scale" spec="https://github.com/yourGuy/viewport_scale" source="git" />
     
     <platform name="ios" />
     <platform name="android" />
