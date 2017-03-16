@@ -590,11 +590,9 @@ window.Avatar = (function(){
         x = c.getContext('2d');
         var counter = 0, images = [];
         var addImage = function(src){
-            alert('start: ' + src);
             var img = new Image(); images.push(img);
-            img.crossorigin = ''; //start Chrome width --allow-file-access-from-files
+            img.crossorigin = 'anonymous'; //start Chrome width --allow-file-access-from-files
             img.onload = function(){
-                alert('done: ' + src);
                 counter++;
                 if(counter >= images.length){
                     for(var i = 0; i < images.length; i++){x.drawImage(images[i], 0, 0);};
@@ -656,7 +654,9 @@ window.Avatar = (function(){
                 case 'interface-random'      : self.randomSchema(); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
-                    var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
+                    alert(c.toDataURL('image/png'));
+                    
+                    var dataUrl = c.toDataURL('image/png'), el = document.getElementById(_interfaceId + '-download');
                     if(window.cordova && window.cordova.base64ToGallery){
                         el.href = 'javascript:void(0)';
                         el.removeAttribute('download');
