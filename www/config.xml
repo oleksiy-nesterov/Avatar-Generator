@@ -26,8 +26,6 @@
     <icon src="img/splashes-icons/144.png" width="144" height="144" platform="android" qualifier="xxhdpi" />
     <icon src="img/splashes-icons/48.png"  width="48"  height="48"  platform="winphone" />
     <icon src="img/splashes-icons/173.png" width="173" height="173" platform="winphone" role="background" />
-    <icon src="img/splashes-icons/64.png"  width="64"  height="64"  platform="webos" />
-    <icon src="img/splashes-icons/32.png"  width="32"  height="32"  platform="webos" role="mini" />
 
     <splash src="splash.png" />
     <splash src="img/splashes-icons/ldpi.9.png"    platform="android" qualifier="ldpi" />             <!-- Android 200x320 -->
@@ -50,51 +48,53 @@
     <splash src="img/splashes-icons/1242X2208.png" platform="ios"     width="1242" height="2208" />   <!-- iPhone 6 Plus (3x) -->
 
     <!-- GENERAL PREFERENCES -->
-    <preference name="phonegap-version"                value="cli-6.5.0" />
-    <preference name="android-minSdkVersion"           value="16" />
-    <preference name="android-targetSdkVersion"        value="23" />
-    <preference name="AndroidPersistentFileLocation"   value="Internal" />
-    <preference name="iosPersistentFileLocation"       value="Library" />
-    <preference name="android-build-tool"              value="gradle" />
-    <preference name="fullscreen"                      value="false" />
-    <preference name="orientation"                     value="portrait" />
-    <preference name="autorotate"                      value="false" readonly="true" />
-    <preference name="target-device"                   value="universal" />
-    <preference name="backgroundcolor"                 value="0xffffffff" />
-    <feature name="WebViewColor">
-        <param name="ios-package"                      value="WebViewColor" />
-    </feature>
+    <preference name="phonegap-version"                 value="cli-6.5.0" />
+    <preference name="android-minSdkVersion"            value="21" /> <!-- Android 5.0 -->
+    <preference name="AndroidPersistentFileLocation"    value="Internal" />
+    <preference name="iosPersistentFileLocation"        value="Library" />
+    <preference name="android-build-tool"               value="gradle" />
+    <preference name="fullscreen"                       value="false" />
+    <preference name="orientation"                      value="portrait" />
+    <preference name="autorotate"                       value="false" readonly="true" />
+    <preference name="target-device"                    value="universal" />
+    <preference name="backgroundcolor"                  value="0xffffffff" />
+    
+    <feature name="WebViewColor"><param name="ios-package" value="WebViewColor" /></feature>
 
     <!-- OTHER PREFERENCES -->
-    <preference name="webviewbounce"                   value="false" />
-    <preference name="prerendered-icon"                value="true" />
-    <preference name="detect-data-types"               value="false" />
-    <preference name="stay-in-webview"                 value="false" />
-    <preference name="exit-on-suspend"                 value="false" />
-    <preference name="AutoHideSplashScreen"            value="true" />
-    <preference name="SplashScreenDelay"               value="1000" />
-    <preference name="SplashShowOnlyFirstTime"         value="true" />
-    <preference name="SplashScreenBackgroundColor"     value="#ffffff" />
-    <preference name="FadeSplashScreenDuration"        value="500" />
-    <preference name="FadeSplashScreen"                value="true"/>
-    <preference name="ShowSplashScreenSpinner"         value="false" />
-    <preference name="EnableViewportScale"             value="true" />
-    <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    <preference name="AllowInlineMediaPlayback"        value="true" />
-    <preference name="AlternateContentSrc"             value="index.html" />
+    <preference name="webviewbounce"                    value="false" />
+    <preference name="prerendered-icon"                 value="true" />
+    <preference name="detect-data-types"                value="false" />
+    <preference name="stay-in-webview"                  value="false" />
+    <preference name="exit-on-suspend"                  value="false" />
+    <preference name="AutoHideSplashScreen"             value="true" />
+    <preference name="SplashScreenDelay"                value="1000" />
+    <preference name="SplashShowOnlyFirstTime"          value="true" />
+    <preference name="SplashScreenBackgroundColor"      value="#ffffff" />
+    <preference name="FadeSplashScreenDuration"         value="500" />
+    <preference name="FadeSplashScreen"                 value="true"/>
+    <preference name="ShowSplashScreenSpinner"          value="false" />
+    <preference name="EnableViewportScale"              value="true" />
+    <preference name="MediaPlaybackRequiresUserAction"  value="false" />
+    <preference name="AllowInlineMediaPlayback"         value="true" />
+    <preference name="AlternateContentSrc"              value="index.html" />
     
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarStyle" value="black-opaque" />
-    <preference name="StatusBarBackgroundColor" value="#ff4242" />
+    <preference name="StatusBarOverlaysWebView"         value="false" />
+    <preference name="StatusBarStyle"                   value="black-opaque" />
+    <preference name="StatusBarBackgroundColor"         value="#ff4242" />
+    
     <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
 
     <!-- CORE PLUGINS -->
-    <plugin name="cordova-plugin-splashscreen"         source="npm" />
-    <plugin name="cordova-plugin-whitelist"            source="npm" spec="1.0.0" />
-    <plugin name="cordova-base64-to-gallery"           source="npm" spec="3.0.0" />
-    <plugin name="cordova-plugin-statusbar"            source="npm" spec="2.2.0" />
-    <plugin name="cordova.plugins.diagnostic"          source="npm" />
-    <plugin name="cordova-plugin-inappbrowser"         source="npm" />
+    <plugin name="cordova-plugin-splashscreen"          source="npm" />
+    <plugin name="cordova-plugin-whitelist"             source="npm" spec="1.0.0" />
+    <plugin name="cordova-base64-to-gallery"            source="npm" spec="3.0.0" />
+    <plugin name="cordova-plugin-statusbar"             source="npm" spec="2.2.0" />
+    <plugin name="cordova.plugins.diagnostic"           source="npm" />
+    <plugin name="cordova-plugin-inappbrowser"          source="npm" />
+    
+    <platform name="ios" />
+    <platform name="android" />
     
     <!-- WKWEBVIEW -->
     <!--
