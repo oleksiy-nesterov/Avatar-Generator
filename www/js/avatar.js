@@ -654,9 +654,8 @@ window.Avatar = (function(){
                 case 'interface-random'      : self.randomSchema(); break;
                 case 'category'              : activateElement(_interfaceId, true); break;
                 case 'interface-save'        : self.drawSchema(self.schema, function(c){
+                    alert(1);
                     try{
-                        alert(1);
-                        alert(c.toDataURL);
                         var dataUrl = c.toDataURL('image/png');
                         alert(2);
                         var el = document.getElementById(_interfaceId + '-download');
