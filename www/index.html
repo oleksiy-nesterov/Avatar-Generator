@@ -104,6 +104,8 @@
 <script type="text/javascript">
     window.app = {init:function(){
         var viewport = document.querySelector('meta[name=viewport]');
+        alert(screen.width);
+        alert(window.innerWidth);
         var scale = screen.width / 640;
         viewport && viewport.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',minimum-scale=' + scale + ',maximum-scale=' + scale);
         //viewport && viewport.setAttribute('content', 'width=640,user-scalable=no');
