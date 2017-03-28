@@ -421,7 +421,7 @@ body {
 .a-editor > ul li.cursor:after {
     width: 0.13em;
     height: 0.13em;
-    transform: translateY(100%) translateX(-50%);
+    transform: translateY(100%) translateX(-51%);
     box-sizing: content-box;    
     border-radius: 50%;
     background: transparent url(../img/cursor.svg) no-repeat center center;

@@ -340,7 +340,9 @@ window.Avatar = function(){
         mouth          : ['alena'],
         ears           : ['2', 'european'],
         nose           : ['alena', 'european'],
-        face           : ['1', 'european']
+        face           : ['1', 'european'],
+        mustache       : ['none'],
+        beard          : ['none']
     },
     _schemaStringify   = null,
     _category          = null,
@@ -623,7 +625,7 @@ window.Avatar = function(){
     };
     self.detectCategoryByPoint = function(x, y, size, s, callback){
         s = s || self.schema;
-        var i, found, result = self.schemaToAssets(s);
+        var i, counter = 0, images = [], found, result = self.schemaToAssets(s);
         if(!result){return false;};
         if(!_canvas){
             _canvas = document.createElement('canvas');
@@ -634,16 +636,20 @@ window.Avatar = function(){
         _context.clearRect(0, 0, _canvas.width, _canvas.height);
         var drawImage = function(src, category, index){
             var img = new Image();
+            images.push(img);
             img.crossorigin = '';
             img.onload = function(){
-                if(found){return;} 
+                counter++;
+                if(found){return;}
                 _context.drawImage(img, 0, 0, size, size);
-                if(_context.getImageData(x, y, 1, 1).data[3] > 50){
+                if(_context.getImageData(x, y, 1, 1).data[3] > 0){
                     typeof(callback) === 'function' && callback(category === 'face' ? 'race' : category);
                     found = true;
                     return;
-                }
-                index == 0 && typeof(callback) === 'function' && callback(null);
+                };
+                if(counter >= images.length){
+                    typeof(callback) === 'function' && callback('background');
+                };
             };
             img.src = src;
         };
@@ -670,7 +676,8 @@ window.Avatar = function(){
         _canvas.height = imgSize;
         _context.clearRect(0, 0, _canvas.width, _canvas.height);
         var addImage = function(src){
-            var img = new Image(); images.push(img);
+            var img = new Image();
+            images.push(img);
             img.crossorigin = ''; //start Chrome width --allow-file-access-from-files
             img.onload = function(){
                 counter++;
@@ -678,8 +685,7 @@ window.Avatar = function(){
                     for(var i = 0; i < images.length; i++){
                         _context.drawImage(images[i], 0, 0);
                     };
-                    if(typeof(callback) !== 'function'){return;};
-                    callback(_canvas);
+                    typeof(callback) === 'function' && callback(_canvas);
                 };
             };
             img.src = src;
