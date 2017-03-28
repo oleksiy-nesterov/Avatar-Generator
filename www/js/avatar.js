@@ -1,22 +1,28 @@
-window.Avatar = (function(){
+window.Avatar = function(){
     var
-    self              = this,
+    self              = {},
+    imgSize           = 480,
+    uiRadius          = 0.395,
     radToDeg          = 180 / Math.PI,
     degToRad          = Math.PI / 180,
     isMobile          = /iphone|ipod|ipad|android|mobile/i.test(navigator.userAgent),
     normalizeAngle    = function(a){a = a < 0 ? 360 + a : a; return Math.abs(a > 360 ? 0 : a);},
     getRandomKey      = function(o, range){var k = Object.keys(o); return range || k.length ? k[k.length > 1 ? Math.floor(Math.random() * (range && range < k.length ? range : k.length)) : 0] : null;},
-    activateElement   = function(el, s){el = typeof(el) == 'string' ? document.getElementById(el) : el; el && el.classList[s ? 'add' : 'remove']('active');},
-    notification      = function(html){
-        var div = document.createElement('DIV'); div.className = 'notification'; div.innerHTML = html; document.body.appendChild(div);
+    activateElement   = function(el, s){el = typeof(el) === 'string' ? document.querySelector(el) : el; el && el.classList[s ? 'add' : 'remove']('active');},
+    notification      = function(html, holder){
+        var div = document.createElement('DIV');
+        div.className = 'a-notification';
+        div.innerHTML = '<p>' + html + '</p>';
+        (holder || document.body).appendChild(div);
         window.setTimeout(function(){div.classList.add('active');}, 100);
-        window.setTimeout(function(){document.body.removeChild(div)}, 5000);
+        window.setTimeout(function(){(holder || document.body).removeChild(div)}, 5000);
     },
     passiveEventsOptions = true;
     try{window.addEventListener('test', null, Object.defineProperty({}, 'passive', {get:function(){
         passiveEventsOptions = {passive:true};
     }}));}catch(e){};    
-
+    
+    var
     storage = (function(){
         var o = this;
         o.is = Boolean(window['localStorage']) || false;
@@ -68,8 +74,7 @@ window.Avatar = (function(){
 
     classOptions = function(){
         var
-        o             = this,
-        _id           = (Math.random() / new Date().getTime()).toString(36).substring(10, 25),
+        o             = {},
         _holder       = null,
         _class        = '',
         _position     = null,
@@ -80,6 +85,8 @@ window.Avatar = (function(){
         _stringify    = '',
         _onActive     = null,
         _onSet        = null,
+        _cssPreffix   = '',
+        _audio        = null,  
 
         removeOptions = function(){
             o.forOptions(function(option){option.element.parentElement.removeChild(option.element);});
@@ -95,21 +102,25 @@ window.Avatar = (function(){
             el.dataset.position = pos;
             el.dataset.value = value;
             el.className = ['option', _class].join(' ');
-            el.style.height = parseInt(window.getComputedStyle(_holder.parentElement, null).getPropertyValue('height'), 10) / 2 + 'px';
+            el.style.height = uiRadius + 'em';
             el.style.transform = el.style.webkitTransform = el.style.msTransform = 'rotateZ(' + angle + 'deg)';
             data = {angle:angle, position:pos, value:value, element:el};
             _allOptions[angle] = data;
-            _holder.appendChild(el);
+            _holder.insertBefore(el, _holder.firstChild);
             return data;
         };
 
         o.init = function(params){
-            //{selector:'', list:[], onActive:null, onSet:null, cssClass:'', arcAngle:360, audion:''}
-            _class    = params.cssClass || '';
-            _audio    = AudioFX.supported.wav && AudioFX(params.audio || 'img/option.wav');
-            _onActive = params.onActive;
-            _onSet    = params.onSet;
-            _holder   = document.querySelector(params.selector);
+            //{selector:'', list:[], onActive:null, onSet:null, cssClass:'', arcAngle:360, audion:'', cssPreffix:''}
+            _class      = params.cssClass || '';
+            _onActive   = params.onActive;
+            _onSet      = params.onSet;
+            _cssPreffix = params.cssPreffix;
+            _holder     = document.querySelector(params.selector);
+            if(params.audio){
+                _audio = document.createElement('audio');
+                _audio.src = params.audio;
+            };
 
             if(!_holder){return 0;};
 
@@ -123,8 +134,9 @@ window.Avatar = (function(){
                     return false;
                 };
             };
+            _holder.classList.add(_cssPreffix + 'options-holder');
             _holder.addEventListener(isMobile ? 'touchstart' : 'mousedown', onClick, passiveEventsOptions);
-            if(params.list && params.list.length){setOptions(params.list || []);};
+            if(params.list && params.list.length){o.setOptions(params.list || []);};
             return o;
         };
         o.forOptions = function(callback){
@@ -140,11 +152,14 @@ window.Avatar = (function(){
             _arcAngle = a;
             _snapAngle = normalizeAngle(_arcAngle / list.length);
             for(var i = 0, l = list.length; i < l; i++){addOption(o.snapAngle * i, list[i]);};
-            typeof(_onSet) == 'function' && _onSet.call(o);
+            typeof(_onSet) === 'function' && _onSet.call(o);
             return o;
         };
         o.tick = function(){
-            if(_audio){_audio.play();};
+            if(_audio){
+                _audio.pause();
+                window.setTimeout(function(){_audio.paused && _audio.play();}, 150);
+            };
             return o;
         };
         o.rotate = function(angle){
@@ -172,7 +187,7 @@ window.Avatar = (function(){
                     o.forOptions(function(option){activateElement(option.element, false);});
                     if(o.currentOption){
                         activateElement(o.currentOption.element, true);
-                        typeof(_onActive) == 'function' && _onActive.call(o, o.currentOption);
+                        typeof(_onActive) === 'function' && _onActive.call(o, o.currentOption);
                         o.tick();
                     };
                 };
@@ -189,8 +204,7 @@ window.Avatar = (function(){
     },
     classCursor = function(){
         var
-        o             = this,
-        _id           = (Math.random() / new Date().getTime()).toString(36).substring(10, 25),
+        o             = {},
         _holder       = null,
         _cursor       = null,
         _onSnap       = null,
@@ -200,8 +214,9 @@ window.Avatar = (function(){
         _position     = null,
         _angle        = null,
         _snapAngle    = 1,
-        _snapDistance = 10,
+        _snapDistance = uiRadius / 24,
         _data         = null,
+        _cssPreffix   = '',
 
         getAngleByVector = function(x0, y0, x1, y1){
             return normalizeAngle(Math.atan2(x1 - x0, y1 - y0) * radToDeg * -1);
@@ -214,7 +229,7 @@ window.Avatar = (function(){
         },
         setRotation = function(angle){
             _cursor.style.transform = _cursor.style.webkitTransform = _cursor.style.msTransform = 'rotateZ(' + angle + 'deg)';
-            typeof(_onRotate) == 'function' && _onRotate.call(o, angle);
+            typeof(_onRotate) === 'function' && _onRotate.call(o, angle);
             return angle;
         },
         getEvent = function(evt){
@@ -222,7 +237,7 @@ window.Avatar = (function(){
         },
         onStart = function(evt){
             if(_data){return;};
-            var e = getEvent(evt), rect = _holder.parentElement.getBoundingClientRect();
+            var rect = _holder.parentElement.getBoundingClientRect();
             _data = {y1:rect.top + rect.height / 2, y2:rect.top + rect.height};
             _data.x1 = _data.x2 = rect.left + rect.width / 2;
             _cursor.classList.add('tap');
@@ -242,28 +257,31 @@ window.Avatar = (function(){
             return false;
         },
         onEnd = function(evt){
-            if(!_data || !_data.moved){return;};
+            _cursor.classList.remove('tap');
+            if(!_data || !_data.moved){
+                _data = null;    
+                return;
+            };
             o.currentAngle = getAngleByVector(_data.x1, _data.y1, _data.x2, _data.y2);
             _data = null;
-            _cursor.classList.remove('tap');
         };
 
         o.init = function(params){
-            //params:{selector:'', snapAngle:0, currentAngle:0, currentPosition:0, onSnap:null, onRotate:null, onRollback:null}
+            //params:{selector:'', snapAngle:0, currentAngle:0, currentPosition:0, onSnap:null, onRotate:null, onRollback:null, cssPreffix:''}
             _snapAngle  = params.snapAngle || 1;
             _onSnap     = params.onSnap;
             _onRotate   = params.onRotate;
             _onRollback = params.onRollback;
+            _cssPreffix = params.cssPreffix;
             _holder     = document.querySelector(params.selector);
 
             if(!_holder){return false;};
 
-            _holder.classList.add('cursor-holder');
-            _radius = parseInt(window.getComputedStyle(_holder.parentElement, null).getPropertyValue('height'), 10) / 2;
+            _holder.classList.add(_cssPreffix + 'cursor-holder');
+            _radius = uiRadius;
             _cursor = document.createElement('LI');
-            _cursor.id = 'cursor-' + _id;
             _cursor.className = 'cursor';
-            _cursor.style.height = _radius + 'px';
+            _cursor.style.height = _radius + 'em';
             _cursor.addEventListener(isMobile ? 'touchstart' : 'mousedown', onStart, passiveEventsOptions);
             document.addEventListener(isMobile ? 'touchmove' : 'mousemove', onMove, passiveEventsOptions);
             document.addEventListener(isMobile ? 'touchend' : 'mouseup', onEnd, true);
@@ -299,9 +317,9 @@ window.Avatar = (function(){
                 var a = _position * o.snapAngle;
                 setRotation(a);
                 if(_angle !== a){
-                    typeof(_onSnap) == 'function' && _onSnap.call(o, a, _position);
+                    typeof(_onSnap) === 'function' && _onSnap.call(o, a, _position);
                 }else{
-                    typeof(_onRollback) == 'function' && _onRollback.call(o, a, _position);
+                    typeof(_onRollback) === 'function' && _onRollback.call(o, a, _position);
                 };
                 _angle = a;
             }
@@ -310,7 +328,7 @@ window.Avatar = (function(){
     };
 
     var
-    _data              = null;
+    _data              = null,
     _schema            = null,
     _defaultSchema     = {
         gender         : 'female',
@@ -326,20 +344,34 @@ window.Avatar = (function(){
     },
     _schemaStringify   = null,
     _category          = null,
-    _uiOptions         = new classOptions(),
-    _uiColors          = new classOptions(),
-    _uiCursor          = new classCursor(),
-    _categoryButtonId  = 'category',
-    _downloadLayerId   = 'download',
-    _editorId          = 'editor',
-    _interfaceId       = 'interface',
-    _moreId            = 'more',
-    _emptyCategory     = 'none',
-    _assetsUrl         = 'img/assets/',
-    _emptyImage        = 'img/empty.png',
-    _shadowImage       = 'img/bg.png',
-    _emptyOptionValue  = 'none',
+    _uiOptions         = classOptions(),
+    _uiColors          = classOptions(),
+    _uiCursor          = classCursor(),
 
+    _rootEl            = null,
+    _id                = 'the-avatar-generator',
+    _cssPreffix        = 'a-',
+    _rootSel           = '.' + _cssPreffix + 'root',
+    _categoryButtonSel = '.' + _cssPreffix + 'interface-category',
+    _downloadLayerSel  = '.' + _cssPreffix + 'download',
+    _editorSel         = '.' + _cssPreffix + 'editor',
+    _interfaceSel      = '.' + _cssPreffix + 'interface',
+    _moreSel           = '.' + _cssPreffix + 'more',
+    _logoSel           = '.' + _cssPreffix + 'logo',
+    _menuSel           = '.' + _cssPreffix + 'interface-menu',
+    
+    _imgSrc            = 'img/',
+    _assetsUrl         = _imgSrc + 'assets/',
+    _emptyImage        = _imgSrc + 'empty.png',
+    _shadowImage       = _imgSrc + 'bg.png',
+    _emptyCategory     = 'none',    
+    _emptyOptionValue  = 'none',
+    _canvas            = null,      
+    _context           = null,
+
+    _getFullSelector = function(sel){
+        return '#' +  _id + ' ' + sel;
+    },
     _getValuesFor = function(g, c){
         if(!self.data){return [];};
         for(var d in self.dependentCategories){
@@ -358,7 +390,7 @@ window.Avatar = (function(){
         v = v || Object.keys(self.data.gender[g][c])[0];
         var colors = [], list = self.data.gender[g][c][v] || [];
         if(typeof(list) != 'object'){return colors;};
-        for(key in list){!onlyWebColors ? colors.push(key) : (key.charAt(0) == '#' && colors.push(key));};
+        for(var key in list){!onlyWebColors ? colors.push(key) : (key.charAt(0) == '#' && colors.push(key));};
         return colors;
     },
     _getArts = function(c, v){
@@ -366,9 +398,9 @@ window.Avatar = (function(){
         return _getArtsFor(self.schema.gender, c, v, true);
     },
     _activateButton = function(el){
-        if(!el || el.disabled || el.classList.contains('active') || !el.classList.contains('button')){return;};
+        if(!el || el.disabled || el.classList.contains('active') || !el.classList.contains(_cssPreffix + 'button')){return;};
         if(/.*(group\d+).*/.test(el.className)){
-            var i, g = el.className.replace(/.*(group\d+).*/g, '$1'), l = document.body.querySelectorAll('.button.' + g), n = l.length;
+            var i, g = el.className.replace(/.*(group\d+).*/g, '$1'), l = document.body.querySelectorAll('.' + _cssPreffix + 'button.' + g), n = l.length;
             for(i = 0; i < n; i++){activateElement(l[i], false);};
         }else{
             window.setTimeout(function(){activateElement(el, false);}, 300);
@@ -376,7 +408,10 @@ window.Avatar = (function(){
         activateElement(el, true);
     },
     _categoryChanged = function(){
-        var el, c, i = 0, a = 0, checkRegExp = new RegExp('^' + _interfaceId + '-');
+        var
+        el, a = 0,
+        sel = _interfaceSel.replace(/^[\.#]/, ''),
+        regExp = new RegExp(sel + '-(hair|eyebrows|eyes|mouth|mustache|beard|nose|ears|race|clothes|background|accessories)');
         _uiOptions.setOptions(_getValues(self.category)).forOptions(function(o){
             if(self.schema[self.category]){
                 if(o.value == self.schema[self.category][0]){
@@ -390,20 +425,18 @@ window.Avatar = (function(){
         });
         _uiCursor.snapAngle = _uiOptions.snapAngle;
         _uiOptions.currentAngle = a;
-        _activateButton(document.getElementById(_interfaceId + '-' + self.category));
-        el = document.getElementById(_categoryButtonId);
-        if(el){
-            while(i < el.classList.length){c = el.classList.item(i); checkRegExp.test(c) ? el.classList.remove(c) : i++;};
-            el.classList.add(_interfaceId + '-' + self.category);
-        };
-        activateElement(_interfaceId, false);
+        _activateButton(_rootEl.querySelector(_interfaceSel + ' ' + _interfaceSel + '-' + self.category));
+        el = _rootEl.querySelector(_categoryButtonSel);
+        el.className = el.className.replace(regExp, '');
+        el.classList.add(sel + '-' + self.category);
+        activateElement(_interfaceSel, false);
     },
     _genderChanged = function(){
         var g, el;
-        _activateButton(document.getElementById(_interfaceId + '-' + self.schema.gender));
+        _activateButton(_rootEl.querySelector(_interfaceSel + '-' + self.schema.gender));
         for(g in self.uniqueCategories){
             self.uniqueCategories[g].forEach(function(c){
-                el = document.getElementById(_interfaceId + '-' + c);
+                el = _rootEl.querySelector(_interfaceSel + '-' + c);
                 if(el){
                     el.disabled = g != self.schema.gender;
                 };
@@ -448,19 +481,25 @@ window.Avatar = (function(){
     Object.defineProperty(self, 'schema', {
         get: function(){return _schema;},
         set: function(val){
-            var el, key, assets, str = JSON.stringify(val);
+            var assets, str = JSON.stringify(val);
             if(str == _schemaStringify){return;};
             assets = self.schemaToAssets(val);
             if(!assets){return;};
             _schemaStringify = str;
             _schema = JSON.parse(_schemaStringify);
             self.categories.forEach(function(c){
-                var el = document.getElementById(_editorId + '-' + c);
+                var el = _rootEl.querySelector(_editorSel + '-' + c);
                 el && (el.style.backgroundImage = ['url(', assets[c] ? _assetsUrl + assets[c] : _emptyImage, ')'].join(''));
             });
             if(self.allCategories[_schema.gender].indexOf(_category) < 0 && Object.keys(self.dependentCategories).indexOf(_category) < 0){
                 _category = self.allCategories[_schema.gender][0];
                 _categoryChanged();
+            };
+            if(_rootEl){
+                var e = document.createEvent('Events');
+                e.initEvent('onchange', true, true);
+                e.avatar = self;
+                _rootEl.dispatchEvent(e);
             };
         }
     });
@@ -582,40 +621,95 @@ window.Avatar = (function(){
         newSchema[property] = value;
         self.schema = newSchema;
     };
+    self.detectCategoryByPoint = function(x, y, size, s, callback){
+        s = s || self.schema;
+        var i, found, result = self.schemaToAssets(s);
+        if(!result){return false;};
+        if(!_canvas){
+            _canvas = document.createElement('canvas');
+            _context = _canvas.getContext('2d');
+        }
+        _canvas.width = size;
+        _canvas.height = size;
+        _context.clearRect(0, 0, _canvas.width, _canvas.height);
+        var drawImage = function(src, category, index){
+            var img = new Image();
+            img.crossorigin = '';
+            img.onload = function(){
+                if(found){return;} 
+                _context.drawImage(img, 0, 0, size, size);
+                if(_context.getImageData(x, y, 1, 1).data[3] > 50){
+                    typeof(callback) === 'function' && callback(category === 'face' ? 'race' : category);
+                    found = true;
+                    return;
+                }
+                index == 0 && typeof(callback) === 'function' && callback(null);
+            };
+            img.src = src;
+        };
+        for(i = self.categories.length - 1; i >= 0; i--){
+            if(found){return;}
+            if(result[self.categories[i]] && result[self.categories[i]] != _emptyCategory){
+                drawImage(_assetsUrl + result[self.categories[i]], self.categories[i], i);
+            };
+        };
+    };
     self.drawSchema = function(s, callback){
         s = s || self.schema;
-        var result = self.schemaToAssets(s); if(!result){return false;};
-        storage.save('avatarSchema', s, true);
-        var x, c = document.createElement('canvas'); c.width = 480; c.height = 480;
-        x = c.getContext('2d');
-        var counter = 0, images = [];
+        var i, counter = 0, images = [], result = self.schemaToAssets(s);
+        if(!result){
+            return false;
+        }else{
+            storage.save(_id + ' avatarSchema', s, true);    
+        };
+        if(!_canvas){
+            _canvas = document.createElement('canvas');
+            _context = _canvas.getContext('2d');
+        }
+        _canvas.width = imgSize;
+        _canvas.height = imgSize;
+        _context.clearRect(0, 0, _canvas.width, _canvas.height);
         var addImage = function(src){
             var img = new Image(); images.push(img);
             img.crossorigin = ''; //start Chrome width --allow-file-access-from-files
             img.onload = function(){
                 counter++;
                 if(counter >= images.length){
-                    for(var i = 0; i < images.length; i++){x.drawImage(images[i], 0, 0);};
-                    if(typeof(callback) != 'function'){return;};
-                    callback(c);
+                    for(var i = 0; i < images.length; i++){
+                        _context.drawImage(images[i], 0, 0);
+                    };
+                    if(typeof(callback) !== 'function'){return;};
+                    callback(_canvas);
                 };
             };
             img.src = src;
         };
-        for(var i = 0; i < self.categories.length; i++){
+        for(i = 0; i < self.categories.length; i++){
             if(result[self.categories[i]] && result[self.categories[i]] != _emptyCategory){
                 addImage(_assetsUrl + result[self.categories[i]]);
             };
             self.categories[i] == 'background' && addImage(_shadowImage);
         };
     };
-    self.init = function(data, schema){
+    self.getDataUrl = function(callback){
+        self.drawSchema(self.schema, function(c){
+            typeof(callback) === 'function' && callback(c.toDataURL());
+        });
+    };
+    self.init = function(data, options){
+        options     = options || {};
+        _id         = options.id || _id;
+        _rootEl     = document.querySelector(options.selector || _rootSel);
+        
         var
-        interfaceEl = document.getElementById(_interfaceId),
-        downloadEl = document.getElementById(_downloadLayerId),
-        moreEl = document.getElementById(_moreId),
+        interfaceEl = _rootEl.querySelector(_interfaceSel),
+        downloadEl  = _rootEl.querySelector(_downloadLayerSel),
+        moreEl      = _rootEl.querySelector(_moreSel),
+        logoEl      = _rootEl.querySelector(_logoSel),
+        menuEl      = _rootEl.querySelector(_menuSel),
+
         addColors = function(list, angle){
-            var a = 0; arc = list.length * 12;
+            var a = 0, arc = list.length * 12;
             _uiColors.setOptions(list, arc);
             rotateColors(angle || 0);
             if(self.schema[self.category] && self.schema[self.category].length > 1){
@@ -633,41 +727,60 @@ window.Avatar = (function(){
             _uiColors.rotate(angle + (180 - arc / 2));
         },
         onClick = function(evt){
-            if(!evt.target.classList.contains('button')){return;};
+            if(!evt.target.classList.contains(_cssPreffix + 'button')){return;};
             evt.target.classList.add('interact');
             window.setTimeout(function(){evt.target.classList.remove('interact');}, 500);
-            switch(evt.target.id){
-                case 'interface-hair'        : self.category = 'hair'; break;
-                case 'interface-eyebrows'    : self.category = 'eyebrows'; break;
-                case 'interface-eyes'        : self.category = 'eyes'; break;
-                case 'interface-mouth'       : self.category = 'mouth'; break;
-                case 'interface-mustache'    : self.category = 'mustache'; break;
-                case 'interface-beard'       : self.category = 'beard'; break;
-                case 'interface-nose'        : self.category = 'nose'; break;
-                case 'interface-ears'        : self.category = 'ears'; break;
-                case 'interface-race'        : self.category = 'race'; break;
-                case 'interface-clothes'     : self.category = 'clothes'; break;
-                case 'interface-background'  : self.category = 'background'; break;
-                case 'interface-accessories' : self.category = 'accessories'; break;
-                case 'interface-female'      : self.gender = 'female'; break;
-                case 'interface-male'        : self.gender = 'male'; break;
-                case 'interface-random'      : self.randomSchema(); break;
-                case 'category'              : activateElement(_interfaceId, true); break;
-                case 'interface-save'        : self.drawSchema(self.schema, function(c){
-                    var dataUrl = c.toDataURL(), el = document.getElementById(_interfaceId + '-download');
-                    if(window.cordova && window.cordova.base64ToGallery){
-                        el.href = 'javascript:void(0)';
-                        el.removeAttribute('download');
-                        el.onclick = function(){Avatar.saveToAlbum(dataUrl);}
-                    }else{
-                        el.href = dataUrl;
-                        el.download = 'avatar.png';
-                        el.onclick = function(){notification('The download will start within second.');}
-                    };
-                    window.setTimeout(function(){activateElement(_downloadLayerId, true);}, 100);
-                }); break;
+            switch(evt.target.dataset.action){
+                case 'hair'       :
+                case 'eyebrows'   :
+                case 'eyes'       :
+                case 'mouth'      :
+                case 'mustache'   : 
+                case 'beard'      : 
+                case 'nose'       : 
+                case 'ears'       : 
+                case 'race'       : 
+                case 'clothes'    : 
+                case 'background' : 
+                case 'accessories':
+                    self.category = evt.target.dataset.action;
+                break;
+                case 'female'     :
+                case 'male'       :
+                    self.gender = evt.target.dataset.action;
+                break;
+                case 'random'     : 
+                    self.randomSchema();
+                break;
+                case 'category'   :
+                    activateElement(_interfaceSel, true);
+                break;
+                case 'download'   :
+                    return;
+                break;
+                case 'save'       :
+                    self.drawSchema(self.schema, function(c){
+                        var dataUrl = c.toDataURL(), el = _rootEl.querySelector(_interfaceSel + '-download');
+                        if(window.cordova && window.cordova.base64ToGallery){
+                            el.href = 'javascript:void(0)';
+                            el.removeAttribute('download');
+                            el.onclick = function(){self.saveToAlbum(dataUrl);}
+                        }else if(/edge|msie|trident/i.test(window.navigator.userAgent)){
+                            el.href = 'javascript:void(0)';
+                            el.onclick = function(){
+                                var win = window.open('', '_blank');
+                                win.document.writeln('<img src="' + dataUrl + '" />');
+                            };
+                        }else{
+                            el.href = dataUrl;
+                            el.download = 'avatar.png';
+                            el.target = '_blank';
+                            el.onclick = function(){notification('The download will start within second.', _rootEl);}
+                        };
+                        window.setTimeout(function(){activateElement(downloadEl, true);}, 100);
+                    });
+                break;
             };
-            if(evt.target.id == 'interface-download'){return;};
             if(evt.target.nodeName == 'A' && evt.target.href){
                 if(window.cordova){
                     window.open(evt.target.href, '_system');
@@ -683,12 +796,34 @@ window.Avatar = (function(){
             var el = evt.currentTarget;
             window.setTimeout(function(){activateElement(el, false);}, downloadEl == el ? 500 : 100);
         };
+        
         var eName = isMobile ? 'touchstart' : 'mousedown';
         document.addEventListener(eName, onClick, passiveEventsOptions);
         interfaceEl.addEventListener(eName, onDeactivate, passiveEventsOptions);
         downloadEl.addEventListener(eName, onDeactivate, passiveEventsOptions);
         moreEl.addEventListener('click', onDeactivate, true);
-
+        
+        _rootEl.id = _id;
+        if(options.showLogo){
+            logoEl.style.display = 'block'
+        };
+        if(options.showMenu){
+            menuEl.style.display = 'block'
+        };
+        if(options.imgSrc){
+            _imgSrc       = options.imgSrc || 'img/';
+            _assetsUrl    = _imgSrc + 'assets/';
+            _emptyImage   = _imgSrc + 'empty.png';
+            _shadowImage  = _imgSrc + 'bg.png';
+        };
+        if(options.autoDetectCategory){
+            _rootEl.querySelector(_editorSel + ' > ol').addEventListener('click', function(e){
+                self.detectCategoryByPoint(e.offsetX, e.offsetY, e.target.clientWidth, self.schema, function(c){
+                    c && (self.category = c);
+                });
+            })
+        };
+        
         _uiColors.init({
             onActive:function(option){
                 option && self.setSchemaProperty(self.category, [self.schema[self.category][0], option.value]);
@@ -698,7 +833,10 @@ window.Avatar = (function(){
                     option.element.style.color = option.value;
                 })
             },
-            selector:'#' + _editorId + '-colors', cssClass:'color'
+            selector   : _getFullSelector(_editorSel + '-colors'),
+            cssClass   : 'color',
+            cssPreffix : _cssPreffix,
+            audio      : _imgSrc + 'option.wav'
         });
         _uiOptions.init({
             onActive:function(option){
@@ -708,7 +846,9 @@ window.Avatar = (function(){
                 self.schema[self.category] && typeof(self.schema[self.category]) != 'string' && self.schema[self.category].length > 1 && value.push(self.schema[self.category][1]);
                 self.setSchemaProperty(self.category, value);
             },
-            selector:'#' + _editorId + '-options'
+            selector   : _getFullSelector(_editorSel + '-options'),
+            cssPreffix : _cssPreffix,
+            audio      : _imgSrc + 'option.wav'
         });
         _uiCursor.init({
             onSnap:function(angle, position){
@@ -720,11 +860,12 @@ window.Avatar = (function(){
             onRotate:function(angle){
                 rotateColors(angle);
             },
-            selector:'#' + _editorId + '-options'
+            selector   : _getFullSelector(_editorSel + '-options'),
+            cssPreffix : _cssPreffix
         });
 
         self.data = data;
-        self.schema = schema || storage.load('avatarSchema') || _defaultSchema;
+        self.schema = options.schema || storage.load(_id + ' avatarSchema') || _defaultSchema;
         _genderChanged();
         _categoryChanged();
         return self;
@@ -750,16 +891,22 @@ window.Avatar = (function(){
             };
         };
     };
-    self.contactMe = function(element){
-        var mail = ['oleksiy.nesterov', '+', [].join.apply(['avatar', 'gmail'], ['@']), '.com'].join('');
-        if(element && !window.cordova){
-           element.innerHTML = mail; 
-        }else{
-            window.open('mailto:' + mail, window.cordova ? '_system' : '_blank');
-        };
-    };
-    self.moreApps = function(){
-        activateElement('more', true);
+    self.more = function(){
+        activateElement(_moreSel, true);
     };
     return self;
-}).call({}).init(window.AvatarData);
+};
+Avatar.contactMe = function(element){
+    var mail = ['oleksiy.nesterov', '+', [].join.apply(['avatar', 'gmail'], ['@']), '.com'].join('');
+    if(element && !window.cordova){
+       element.innerHTML = mail; 
+    }else{
+        window.open('mailto:' + mail, window.cordova ? '_system' : '_blank');
+    };
+};
+
+(Avatar()).init(window.AvatarData, {
+    showLogo:true,
+    showMenu:true,
+    autoDetectCategory:true
+});

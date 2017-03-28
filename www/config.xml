@@ -92,7 +92,6 @@
     <plugin name="cordova-plugin-statusbar"             source="npm" spec="2.2.0" />
     <plugin name="cordova.plugins.diagnostic"           source="npm" />
     <plugin name="cordova-plugin-inappbrowser"          source="npm" />
-    <plugin name="androidviewport" spec="https://github.com/commonpike/androidviewport" source="git" />
     
     <platform name="ios" />
     <platform name="android" />
