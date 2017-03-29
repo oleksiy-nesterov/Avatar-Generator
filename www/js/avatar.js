@@ -20,7 +20,7 @@ window.Avatar = function(){
     passiveEventsOptions = true;
     try{window.addEventListener('test', null, Object.defineProperty({}, 'passive', {get:function(){
         passiveEventsOptions = {passive:true};
-    }}));}catch(e){};    
+    }}));}catch(e){};
     
     var
     storage = (function(){
@@ -130,12 +130,12 @@ window.Avatar = function(){
                     evt.target.classList.add('tap');
                     window.setTimeout(function(){evt.target.classList.remove('tap');}, 500);
                     evt.stopPropagation();
-                    //evt.preventDefault();
+                    evt.preventDefault();
                     return false;
                 };
             };
             _holder.classList.add(_cssPreffix + 'options-holder');
-            _holder.addEventListener(isMobile ? 'touchstart' : 'mousedown', onClick, passiveEventsOptions);
+            _holder.addEventListener(isMobile ? 'touchstart' : 'mousedown', onClick);
             if(params.list && params.list.length){o.setOptions(params.list || []);};
             return o;
         };
@@ -766,22 +766,44 @@ window.Avatar = function(){
                 break;
                 case 'save'       :
                     self.drawSchema(self.schema, function(c){
-                        var dataUrl = c.toDataURL(), el = _rootEl.querySelector(_interfaceSel + '-download');
+                        var
+                        dataUrl = c.toDataURL(),
+                        el = _rootEl.querySelector(_interfaceSel + '-download'),
+                        onfocus = function(){
+                            window.onfocus = function(){
+                                notification('The avatar picture is ready to be used.', _rootEl);
+                                window.onfocus = undefined;
+                            };
+                        };
                         if(window.cordova && window.cordova.base64ToGallery){
                             el.href = 'javascript:void(0)';
                             el.removeAttribute('download');
-                            el.onclick = function(){self.saveToAlbum(dataUrl);}
+                            el.onclick = function(){
+                                self.saveToAlbum(
+                                    dataUrl,
+                                    {prefix:'avatar_', mediaScanner:true},
+                                    function(){notification('The avatar picture has stored in the album.', _rootEl);},
+                                    function(){notification('Something went wrong while saving the avatar picture.', _rootEl);}
+                                );
+                            };
                         }else if(/edge|msie|trident/i.test(window.navigator.userAgent)){
                             el.href = 'javascript:void(0)';
                             el.onclick = function(){
                                 var win = window.open('', '_blank');
                                 win.document.writeln('<img src="' + dataUrl + '" />');
+                                onfocus();
                             };
                         }else{
                             el.href = dataUrl;
                             el.download = 'avatar.png';
                             el.target = '_blank';
-                            el.onclick = function(){notification('The download will start within second.', _rootEl);}
+                            el.onclick = function(){
+                                if(/safari/i.test(navigator.userAgent)){
+                                    onfocus();
+                                }else{
+                                    notification('The download will start within second.', _rootEl);
+                                }
+                            };
                         };
                         window.setTimeout(function(){activateElement(downloadEl, true);}, 100);
                     });
@@ -795,7 +817,7 @@ window.Avatar = function(){
                 };
             };
             evt.stopPropagation();
-            //evt.preventDefault();
+            evt.preventDefault();
             return false;
         },
         onDeactivate = function(evt){
@@ -804,10 +826,10 @@ window.Avatar = function(){
         };
         
         var eName = isMobile ? 'touchstart' : 'mousedown';
-        document.addEventListener(eName, onClick, passiveEventsOptions);
-        interfaceEl.addEventListener(eName, onDeactivate, passiveEventsOptions);
-        downloadEl.addEventListener(eName, onDeactivate, passiveEventsOptions);
-        moreEl.addEventListener('click', onDeactivate, true);
+        document.addEventListener(eName, onClick);
+        interfaceEl.addEventListener(eName, onDeactivate);
+        downloadEl.addEventListener(eName, onDeactivate);
+        moreEl.addEventListener('click', onDeactivate);
         
         _rootEl.id = _id;
         if(options.showLogo){
