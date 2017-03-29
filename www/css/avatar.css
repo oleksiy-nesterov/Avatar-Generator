@@ -218,6 +218,7 @@ body {
     opacity: 0;
     will-change: transform, opacity;
     transition: transform ease 0.5s, opacity linear 0.3s;
+    -moz-transition: transform ease .5s, opacity linear .51s; /*ff fix*/
 }
 .a-panel.active ul li {
     opacity: 1;
@@ -256,7 +257,7 @@ body {
     left: 50%;
     height: 0.1em;
     pointer-events: none;
-    transform: translateY(-140%) translateX(-50%);
+    transform: translateY(-150%) translateX(-50%);
 }
 @keyframes a-logo-face-anim {
     0%   {transform: rotateZ(0);}
@@ -266,7 +267,7 @@ body {
     100% {transform: rotateZ(0);}
 }
 @keyframes a-logo-eye1-anim {
-    0%   {transform: translateX(0) translateY(0)}
+    0%   {transform: translateX(0) translateY(0);}
     10%  {transform: translateX(0) translateY(0);}
     15%  {transform: translateX(-150%) translateY(-50%);}
     20%  {transform: translateX(-150%) translateY(-50%) scaleY(0.5);}
@@ -288,18 +289,21 @@ body {
     animation-name: a-logo-face-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
+    -moz-animation: none;
 }
 .a-logo-eye1 {
     transform-origin: 50% 50%;
     animation-name: a-logo-eye1-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
+    -moz-animation: none;
 }
 .a-logo-eye2 {
     transform-origin: 50% 50%;
     animation-name: a-logo-eye2-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
+    -moz-animation: none;
 }
 .a-editor {
     padding: 0.1em;
@@ -347,10 +351,6 @@ body {
     bottom: 0;
     width: 0;
     transform-origin: top center;
-    /*
-    display: flex;
-    justify-content: center;
-    */
 }
 .debug .a-editor > ul li {
     width: 1px;
@@ -441,7 +441,7 @@ body {
     background: transparent url(../img/bg.png) no-repeat center bottom;
 }
 .a-interface-menu {
-    margin-top:0.1em;
+    margin-top:0.13em;
     display:none;
 }
 .a-interface-hair {
