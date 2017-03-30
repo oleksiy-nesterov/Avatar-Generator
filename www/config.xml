@@ -72,7 +72,7 @@
     <preference name="SplashScreenDelay"                value="20000" />
     <preference name="SplashShowOnlyFirstTime"          value="true" />
     <preference name="SplashScreenBackgroundColor"      value="#ffffff" />
-    <preference name="FadeSplashScreenDuration"         value="20000" />
+    <preference name="FadeSplashScreenDuration"         value="500" />
     <preference name="FadeSplashScreen"                 value="true"/>
     <preference name="ShowSplashScreenSpinner"          value="false" />
 

@@ -523,6 +523,10 @@ body {
     transform: none;
     opacity: 1;
 }
+.a-interface-category{
+    will-change: background;
+    transition: background 0.3s ease;
+}
 .a-links{
     margin-top:0.02em;
 }
