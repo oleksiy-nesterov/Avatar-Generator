@@ -118,19 +118,16 @@
     window.app = {
         initialized: false,
         init: function(){
-            console.log('init');
             if(this.initialized){
                 return;
             };
             if(window.StatusBar){
-                console.log('statusbar');
                 window.StatusBar.styleLightContent();
                 window.StatusBar.backgroundColorByHexString('#ff4242');
                 window.StatusBar.show();
                 window.StatusBar.overlaysWebView(false);
             };
             if(window.navigator.splashscreen){
-                console.log('splashscreen');
                 window.navigator.splashscreen.hide();
             };
             this.initialized = true;

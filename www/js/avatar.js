@@ -780,13 +780,12 @@ window.Avatar = function(){
                             el.href = 'javascript:void(0)';
                             el.removeAttribute('download');
                             el.onclick = function(){
+                                /*
                                 var save = function(){
-                                    console.log('saveToAlbum');
-                                    self.saveToAlbum(dataUrl, {prefix:'avatar_'});
+                                    self.saveToAlbum(dataUrl);
                                     notification('The avatar picture has stored in the album.', _rootEl);
                                 };
-                                if(isIOS && cordova.plugins && cordova.plugins.diagnostic){
-                                    console.log('save');
+                                if(isIOS && window.cordova.plugins && window.cordova.plugins.diagnostic){
                                     var diag = window.cordova.plugins.diagnostic;
                                     diag.isCameraRollAuthorized(function(authorized){
                                         if(authorized){
@@ -814,7 +813,8 @@ window.Avatar = function(){
                                     });
                                 }else{
                                     save();
-                                };
+                                };*/
+                                self.saveToAlbum(dataUrl);
                             };
                         }else if(/edge|msie|trident/i.test(window.navigator.userAgent)){
                             el.href = 'javascript:void(0)';
@@ -934,14 +934,14 @@ window.Avatar = function(){
                 window.cordova.base64ToGallery(
                     dataUrl,
                     'avatar_',
-                    function(){notification('Avatar has been saved into album.');},
-                    function(){notification('Save. Something went wrong.');}
+                    function(){notification('Avatar has been saved into album.', _rootEl);},
+                    function(){notification('Save. Something went wrong.', _rootEl);}
                 )
             };
             if(/android/i.test(navigator.userAgent) && window.cordova.plugins && window.cordova.plugins.diagnostic){
                 window.cordova.plugins.diagnostic.requestRuntimePermission(
-                    function(granted){granted ? save() : notification('Permission not granted for the requested operation.');},
-                    function(){notification('Permission. Something went wrong.');},
+                    function(granted){granted ? save() : notification('Permission not granted for the requested operation.', _rootEl);},
+                    function(){notification('Permission. Something went wrong.', _rootEl);},
                     window.cordova.plugins.diagnostic.runtimePermission.WRITE_EXTERNAL_STORAGE
                 );
             }else{
