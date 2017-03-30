@@ -131,13 +131,14 @@
                 window.StatusBar.overlaysWebView(false);
             };
             if(window.navigator.splashscreen){
+                console.log('splashscreen');
                 window.navigator.splashscreen.hide();
             };
             this.initialized = true;
         }
     };
     window.document.addEventListener('deviceready', window.app.init, false);
-    window.setTimeout(window.app.init, 1000);
+    window.setTimeout(window.app.init, 3000);
 </script>
 <script type="text/javascript" src="phonegap.js" onerror="window.app.init()"></script>
 </html>

@@ -47,6 +47,9 @@
     <splash src="img/splashes-icons/1080X1920.png"                    width="1080" height="1920" />
     <splash src="img/splashes-icons/1242X2208.png" platform="ios"     width="1242" height="2208" />   <!-- iPhone 6 Plus (3x) -->
 
+    <platform name="ios" />
+    <platform name="android" />
+    
     <!-- GENERAL PREFERENCES -->
     <preference name="phonegap-version"                 value="cli-6.5.0" />
     <preference name="android-minSdkVersion"            value="21" /> <!-- Android 5.0 -->
@@ -58,7 +61,7 @@
     <preference name="autorotate"                       value="false" readonly="true" />
     <preference name="target-device"                    value="universal" />
     <preference name="backgroundcolor"                  value="0xffffffff" />
-    
+
     <feature name="WebViewColor"><param name="ios-package" value="WebViewColor" /></feature>
 
     <!-- OTHER PREFERENCES -->
@@ -86,18 +89,17 @@
     <preference name="StatusBarOverlaysWebView"         value="false" />
     <preference name="StatusBarStyle"                   value="black-opaque" />
     <preference name="StatusBarBackgroundColor"         value="#ff4242" />
+    
     <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
 
     <!-- CORE PLUGINS -->
+    <plugin name="cordova-plugin-device"                source="npm" />
+    <plugin name="cordova-plugin-dialogs"               source="npm" />
     <plugin name="cordova-plugin-splashscreen"          source="npm" />
     <plugin name="cordova-plugin-whitelist"             source="npm" spec="1.0.0" />
     <plugin name="cordova-base64-to-gallery"            source="npm" spec="3.0.0" />
     <plugin name="cordova-plugin-statusbar"             source="npm" spec="2.2.0" />
     <plugin name="cordova.plugins.diagnostic"           source="npm" />
-    <plugin name="cordova-plugin-inappbrowser"          source="npm" />
-    
-    <platform name="ios" />
-    <platform name="android" />
     
     <!-- WKWEBVIEW -->
     <!--
@@ -128,6 +130,8 @@
     <!--config-file platform="ios" parent="CFBundleVersion"><string>0.0.0</string></config-file -->
     <config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file>
     <config-file platform="android" parent="/manifest"><application android:hardwareAccelerated="true"></application></config-file>
+    <config-file platform="ios" parent="UIStatusBarHidden" overwrite="true"><true /></config-file>
+    <config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true"><false /></config-file>    
 
     <allow-intent href="*" />
     <allow-navigation href="*" />
