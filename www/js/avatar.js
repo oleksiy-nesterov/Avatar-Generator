@@ -781,10 +781,12 @@ window.Avatar = function(){
                             el.removeAttribute('download');
                             el.onclick = function(){
                                 var save = function(){
+                                    console.log('saveToAlbum');
                                     self.saveToAlbum(dataUrl, {prefix:'avatar_'});
                                     notification('The avatar picture has stored in the album.', _rootEl);
                                 };
                                 if(isIOS && cordova.plugins && cordova.plugins.diagnostic){
+                                    console.log('save');
                                     var diag = window.cordova.plugins.diagnostic;
                                     diag.isCameraRollAuthorized(function(authorized){
                                         if(authorized){

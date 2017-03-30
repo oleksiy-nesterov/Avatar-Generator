@@ -119,10 +119,12 @@
     window.app = {
         initialized: false,
         init: function(){
+            console.log('init');
             if(this.initialized){
                 return;
             };
             if(window.StatusBar){
+                console.log('statusbar');
                 window.StatusBar.styleLightContent();
                 window.StatusBar.backgroundColorByHexString('#ff4242');
                 window.StatusBar.show();
