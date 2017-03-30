@@ -14,7 +14,7 @@ body {
     text-align: center;
     line-height: 1.2;
     position: relative;
-
+    overflow: hidden;
 }
 .a-root {
     margin: 0 auto;
@@ -103,7 +103,6 @@ body {
     top: 0;
     bottom: 0;
     z-index: 1;
-    pointer-events: none;
     transform:translateY(-200%);
     will-change: transform;
     transition: transform linear 0s 0.5s;
@@ -379,8 +378,8 @@ body {
     display: inline-block;
     position: absolute;
     bottom: 0;
-    height: 0.078125em;
-    width: 0.078125em;
+    height: 0.1em;
+    width: 0.1em;
     background-color: rgba(255, 255, 255, 0.01);
     transform: translateY(50%) translateX(-50%);
     border-radius: 50%;

@@ -6,6 +6,7 @@ window.Avatar = function(){
     radToDeg          = 180 / Math.PI,
     degToRad          = Math.PI / 180,
     isMobile          = /iphone|ipod|ipad|android|mobile/i.test(navigator.userAgent),
+    isIOS             = /iphone|ipod|ipad/i.test(navigator.userAgent),
     normalizeAngle    = function(a){a = a < 0 ? 360 + a : a; return Math.abs(a > 360 ? 0 : a);},
     getRandomKey      = function(o, range){var k = Object.keys(o); return range || k.length ? k[k.length > 1 ? Math.floor(Math.random() * (range && range < k.length ? range : k.length)) : 0] : null;},
     activateElement   = function(el, s){el = typeof(el) === 'string' ? document.querySelector(el) : el; el && el.classList[s ? 'add' : 'remove']('active');},
@@ -253,7 +254,7 @@ window.Avatar = function(){
             d = getDistanceByAngle(_radius, _radius, a - ra);
             d < _snapDistance && (o.currentAngle = a);
             evt.stopPropagation();
-            //evt.preventDefault();
+            !isMobile && evt.preventDefault();
             return false;
         },
         onEnd = function(evt){
@@ -779,12 +780,39 @@ window.Avatar = function(){
                             el.href = 'javascript:void(0)';
                             el.removeAttribute('download');
                             el.onclick = function(){
-                                self.saveToAlbum(
-                                    dataUrl,
-                                    {prefix:'avatar_', mediaScanner:true},
-                                    function(){notification('The avatar picture has stored in the album.', _rootEl);},
-                                    function(){notification('Something went wrong while saving the avatar picture.', _rootEl);}
-                                );
+                                var save = function(){
+                                    self.saveToAlbum(dataUrl, {prefix:'avatar_'});
+                                    notification('The avatar picture has stored in the album.', _rootEl);
+                                };
+                                if(isIOS && cordova.plugins && cordova.plugins.diagnostic){
+                                    var diag = window.cordova.plugins.diagnostic;
+                                    diag.isCameraRollAuthorized(function(authorized){
+                                        if(authorized){
+                                            save();
+                                        }else{
+                                            diag.getCameraRollAuthorizationStatus(
+                                                function(status){
+                                                    if(status === diag.permissionStatus.NOT_REQUESTED){
+                                                        diag.requestCameraRollAuthorization(function(s){
+                                                            s === diag.permissionStatus.GRANTED && save();
+                                                        });
+                                                    }else if(status === diag.permissionStatus.DENIED || status === diag.permissionStatus.DENIED_ALWAYS){
+                                                        window.navigator.notification.confirm(
+                                                            'The Avatar Generator is not authorised to access the photo library. Would you like to switch to the Settings app to allow access?',
+                                                            function(v){v === 1 && diag.switchToSettings();},
+                                                            'Authorisation',
+                                                            ['Yes', 'No']
+                                                        );
+                                                    }else{
+                                                        save();
+                                                    };
+                                                }
+                                            );
+                                        };
+                                    });
+                                }else{
+                                    save();
+                                };
                             };
                         }else if(/edge|msie|trident/i.test(window.navigator.userAgent)){
                             el.href = 'javascript:void(0)';
@@ -817,7 +845,7 @@ window.Avatar = function(){
                 };
             };
             evt.stopPropagation();
-            evt.preventDefault();
+            !isMobile && evt.preventDefault();
             return false;
         },
         onDeactivate = function(evt){

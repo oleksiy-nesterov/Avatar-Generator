@@ -122,9 +122,12 @@
             window.StatusBar.backgroundColorByHexString('#ff4242');
             window.StatusBar.show();
             window.StatusBar.overlaysWebView(false);
-        }
+        };
+        if(window.navigator.splashscreen){
+            window.navigator.splashscreen.hide();
+        };
     }};
-    window.document.addEventListener('deviceready', window.app.init, false);
+    window.document.addEventListener('deviceready', window.app.init);
 </script>
 <script type="text/javascript" src="phonegap.js" onerror="window.app.init()"></script>
 </html>
