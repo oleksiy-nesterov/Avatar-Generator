@@ -110,7 +110,6 @@ window.Avatar = function(){
             _holder.insertBefore(el, _holder.firstChild);
             return data;
         };
-
         o.init = function(params){
             //{selector:'', list:[], onActive:null, onSet:null, cssClass:'', arcAngle:360, audion:'', cssPreffix:''}
             _class      = params.cssClass || '';
@@ -122,9 +121,7 @@ window.Avatar = function(){
                 _audio = document.createElement('audio');
                 _audio.src = params.audio;
             };
-
             if(!_holder){return 0;};
-
             var onClick = function(evt){
                 if(evt.target.parentElement == _holder && typeof(evt.target.dataset.angle) != 'undefined'){
                     o.currentAngle = evt.target.dataset.angle;
@@ -186,6 +183,7 @@ window.Avatar = function(){
                 if(_angle !== a){
                     _angle = a;
                     o.forOptions(function(option){activateElement(option.element, false);});
+                    if(_angle === 360){_angle = 0;}
                     if(o.currentOption){
                         activateElement(o.currentOption.element, true);
                         typeof(_onActive) === 'function' && _onActive.call(o, o.currentOption);
@@ -205,19 +203,20 @@ window.Avatar = function(){
     },
     classCursor = function(){
         var
-        o             = {},
-        _holder       = null,
-        _cursor       = null,
-        _onSnap       = null,
-        _onRollback   = null,
-        _onRotate     = null,
-        _radius       = 0,
-        _position     = null,
-        _angle        = null,
-        _snapAngle    = 1,
-        _snapDistance = uiRadius / 24,
-        _data         = null,
-        _cssPreffix   = '',
+        o              = {},
+        _holder        = null,
+        _cursor        = null,
+        _onSnap        = null,
+        _onRollback    = null,
+        _onRotate      = null,
+        _radius        = 0,
+        _position      = null,
+        _angle         = null,
+        _phisicalAngle = 0,
+        _snapAngle     = 1,
+        _snapDistance  = uiRadius / 24,
+        _data          = null,
+        _cssPreffix    = '',
 
         getAngleByVector = function(x0, y0, x1, y1){
             return normalizeAngle(Math.atan2(x1 - x0, y1 - y0) * radToDeg * -1);
@@ -229,9 +228,21 @@ window.Avatar = function(){
             return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2) - 2 * d1 * d2 * Math.cos(a * degToRad)); //https://en.wikipedia.org/wiki/Law_of_cosines
         },
         setRotation = function(angle){
-            _cursor.style.transform = _cursor.style.webkitTransform = _cursor.style.msTransform = 'rotateZ(' + angle + 'deg)';
-            typeof(_onRotate) === 'function' && _onRotate.call(o, angle);
-            return angle;
+            if(_phisicalAngle === angle){return;};
+            if(Math.abs(angle - _phisicalAngle) > 180){ //reverse animation
+                var a = angle > _phisicalAngle ? 360 + _phisicalAngle : _phisicalAngle - 360;
+                _cursor.style.transitionuration = _cursor.style.webkitTransitionDuration = _cursor.style.msTransitionDuration = '0s';
+                _cursor.style.transform = _cursor.style.webkitTransform = _cursor.style.msTransform = 'rotateZ(' + a + 'deg)';
+                window.setTimeout(function(){
+                    _cursor.style.transitionDuration = _cursor.style.webkitTransitionDuration = _cursor.style.msTransitionDuration = '';
+                    _cursor.style.transform = _cursor.style.webkitTransform = _cursor.style.msTransform = 'rotateZ(' + angle + 'deg)';
+                }, 50);
+            }else{
+                _cursor.style.transform = _cursor.style.webkitTransform = _cursor.style.msTransform = 'rotateZ(' + angle + 'deg)';    
+            };
+            _phisicalAngle = angle;
+            typeof(_onRotate) === 'function' && _onRotate.call(o, _phisicalAngle);
+            return _phisicalAngle;
         },
         getEvent = function(evt){
             return evt.touches && evt.touches.length ? evt.touches[0] : evt;
@@ -254,19 +265,18 @@ window.Avatar = function(){
             d = getDistanceByAngle(_radius, _radius, a - ra);
             d < _snapDistance && (o.currentAngle = a);
             evt.stopPropagation();
-            !isMobile && evt.preventDefault();
+            evt.returnValue = false;
             return false;
         },
         onEnd = function(evt){
-            _cursor.classList.remove('tap');
             if(!_data || !_data.moved){
                 _data = null;    
                 return;
             };
             o.currentAngle = getAngleByVector(_data.x1, _data.y1, _data.x2, _data.y2);
+            _cursor.classList.remove('tap');
             _data = null;
         };
-
         o.init = function(params){
             //params:{selector:'', snapAngle:0, currentAngle:0, currentPosition:0, onSnap:null, onRotate:null, onRollback:null, cssPreffix:''}
             _snapAngle  = params.snapAngle || 1;
@@ -275,9 +285,7 @@ window.Avatar = function(){
             _onRollback = params.onRollback;
             _cssPreffix = params.cssPreffix;
             _holder     = document.querySelector(params.selector);
-
             if(!_holder){return false;};
-
             _holder.classList.add(_cssPreffix + 'cursor-holder');
             _radius = uiRadius;
             _cursor = document.createElement('LI');
@@ -316,6 +324,7 @@ window.Avatar = function(){
                 if(val === _angle){return;};
                 _position = Math.round(val / o.snapAngle);
                 var a = _position * o.snapAngle;
+                a === 360 && (a = 0);
                 setRotation(a);
                 if(_angle !== a){
                     typeof(_onSnap) === 'function' && _onSnap.call(o, a, _position);
@@ -780,40 +789,6 @@ window.Avatar = function(){
                             el.href = 'javascript:void(0)';
                             el.removeAttribute('download');
                             el.onclick = function(){
-                                /*
-                                var save = function(){
-                                    self.saveToAlbum(dataUrl);
-                                    notification('The avatar picture has stored in the album.', _rootEl);
-                                };
-                                if(isIOS && window.cordova.plugins && window.cordova.plugins.diagnostic){
-                                    var diag = window.cordova.plugins.diagnostic;
-                                    diag.isCameraRollAuthorized(function(authorized){
-                                        if(authorized){
-                                            save();
-                                        }else{
-                                            diag.getCameraRollAuthorizationStatus(
-                                                function(status){
-                                                    if(status === diag.permissionStatus.NOT_REQUESTED){
-                                                        diag.requestCameraRollAuthorization(function(s){
-                                                            s === diag.permissionStatus.GRANTED && save();
-                                                        });
-                                                    }else if(status === diag.permissionStatus.DENIED || status === diag.permissionStatus.DENIED_ALWAYS){
-                                                        window.navigator.notification.confirm(
-                                                            'The Avatar Generator is not authorised to access the photo library. Would you like to switch to the Settings app to allow access?',
-                                                            function(v){v === 1 && diag.switchToSettings();},
-                                                            'Authorisation',
-                                                            ['Yes', 'No']
-                                                        );
-                                                    }else{
-                                                        save();
-                                                    };
-                                                }
-                                            );
-                                        };
-                                    });
-                                }else{
-                                    save();
-                                };*/
                                 self.saveToAlbum(dataUrl);
                             };
                         }else if(/edge|msie|trident/i.test(window.navigator.userAgent)){
