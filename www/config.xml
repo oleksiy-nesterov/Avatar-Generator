@@ -49,6 +49,7 @@
 
     <platform name="ios" />
     <platform name="android" />
+    <platform name="windows" />
     
     <!-- GENERAL PREFERENCES -->
     <preference name="phonegap-version"                 value="cli-6.5.0" />
@@ -91,6 +92,8 @@
     <preference name="StatusBarBackgroundColor"         value="#ff4242" />
     
     <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
+    
+    <preference name="windows-identity-name"            value="35519Webmotoric.TheAvatarGenerator" />
 
     <!-- CORE PLUGINS -->
     <plugin name="cordova-plugin-device"                source="npm" />
