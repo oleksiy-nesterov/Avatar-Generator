@@ -64,7 +64,6 @@
     <preference name="backgroundcolor"                  value="0xffffffff" />
 
     <feature name="WebViewColor"><param name="ios-package" value="WebViewColor" /></feature>
-    <preference name="windows-arch" value="anycpu" />
 
     <!-- OTHER PREFERENCES -->
     <preference name="webviewbounce"                    value="false" />
@@ -95,6 +94,9 @@
     <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
     
     <preference name="windows-identity-name"            value="35519Webmotoric.TheAvatarGenerator" />
+    <preference name="windows-arch"                     value="anycpu" />
+    <preference name="windows-appx-target"              value="uap" />
+    <preference name="windows-target-version"           value="10.0" />
 
     <!-- CORE PLUGINS -->
     <plugin name="cordova-plugin-device"                source="npm" />
