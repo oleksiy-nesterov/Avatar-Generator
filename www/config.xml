@@ -94,7 +94,7 @@
     <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
     
     <preference name="windows-identity-name"            value="35519Webmotoric.TheAvatarGenerator" />
-    <preference name="windows-arch"                     value="anycpu" />
+    <preference name="windows-arch"                     value="arm" />
     <preference name="windows-appx-target"              value="uap" />
     <preference name="windows-target-version"           value="10.0" />
 
