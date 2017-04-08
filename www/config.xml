@@ -64,6 +64,7 @@
     <preference name="backgroundcolor"                  value="0xffffffff" />
 
     <feature name="WebViewColor"><param name="ios-package" value="WebViewColor" /></feature>
+    <preference name="windows-arch" value="anycpu" />
 
     <!-- OTHER PREFERENCES -->
     <preference name="webviewbounce"                    value="false" />
