@@ -1,59 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0" id="com.webmotoric.avatar-generator" version="1.1.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0" id="com.webmotoric.avatar-generator" version="{{version}}">
     <name>The Avatar Generator</name>
     <description>App allows you generate your own user picture.</description>
     <author href="http://avatar-generator.appspot.com" email="oleksiy.nesterov+avatar@gmail.com">Webmotoric</author>
 
-    <icon src="img/splashes-icons/29.png"  width="29"  height="29"  />
-    <icon src="img/splashes-icons/40.png"  width="40"  height="40"  />
-    <icon src="img/splashes-icons/50.png"  width="50"  height="50"  />
-    <icon src="img/splashes-icons/57.png"  width="57"  height="57"  />
-    <icon src="img/splashes-icons/58.png"  width="58"  height="58"  />
-    <icon src="img/splashes-icons/60.png"  width="60"  height="60"  />
-    <icon src="img/splashes-icons/72.png"  width="72"  height="72"  platform="ios" />
-    <icon src="img/splashes-icons/76.png"  width="76"  height="76"  />
-    <icon src="img/splashes-icons/80.png"  width="80"  height="80"  />
-    <icon src="img/splashes-icons/100.png" width="100" height="100" />
-    <icon src="img/splashes-icons/114.png" width="114" height="114" />
-    <icon src="img/splashes-icons/120.png" width="120" height="120" />
-    <icon src="img/splashes-icons/144.png" width="144" height="144" />
-    <icon src="img/splashes-icons/152.png" width="152" height="152" />
-    <icon src="img/splashes-icons/180.png" width="180" height="180" />
-    <icon src="img/splashes-icons/36.png"  width="36"  height="36"  platform="android" qualifier="ldpi" />
-    <icon src="img/splashes-icons/48.png"  width="48"  height="48"  platform="android" qualifier="mdpi" />
-    <icon src="img/splashes-icons/72.png"  width="72"  height="72"  platform="android" qualifier="hdpi" />
-    <icon src="img/splashes-icons/96.png"  width="96"  height="96"  platform="android" qualifier="xhdpi" />
-    <icon src="img/splashes-icons/144.png" width="144" height="144" platform="android" qualifier="xxhdpi" />
-    <icon src="img/splashes-icons/48.png"  width="48"  height="48"  platform="winphone" />
-    <icon src="img/splashes-icons/173.png" width="173" height="173" platform="winphone" role="background" />
+    <icon src="icon.png" />
+    <icon src="img/splashes-icons/29.png"   width="29"   height="29"   platform="ios" />
+    <icon src="img/splashes-icons/40.png"   width="40"   height="40"   platform="ios" />
+    <icon src="img/splashes-icons/50.png"   width="50"   height="50"  />
+    <icon src="img/splashes-icons/57.png"   width="57"   height="57"   platform="ios" />
+    <icon src="img/splashes-icons/58.png"   width="58"   height="58"  />
+    <icon src="img/splashes-icons/60.png"   width="60"   height="60"  />
+    <icon src="img/splashes-icons/72.png"   width="72"   height="72"   platform="ios" />
+    <icon src="img/splashes-icons/76.png"   width="76"   height="76"  />
+    <icon src="img/splashes-icons/80.png"   width="80"   height="80"  />
+    <icon src="img/splashes-icons/87.png"   width="87"   height="87"   platform="ios" />
+    <icon src="img/splashes-icons/100.png"  width="100"  height="100" />
+    <icon src="img/splashes-icons/114.png"  width="114"  height="114"  platform="ios" />
+    <icon src="img/splashes-icons/120.png"  width="120"  height="120" />
+    <icon src="img/splashes-icons/144.png"  width="144"  height="144"  platform="ios" />
+    <icon src="img/splashes-icons/152.png"  width="152"  height="152" />
+    <icon src="img/splashes-icons/167.png"  width="167"  height="167"  platform="ios" />
+    <icon src="img/splashes-icons/180.png"  width="180"  height="180" />
+    <icon src="img/splashes-icons/512.png"  width="512"  height="512"  platform="ios" />
+    <icon src="img/splashes-icons/1024.png" width="1024" height="1024" platform="ios" />    
+    
+    <icon src="img/splashes-icons/36.png"   width="36"   height="36"   platform="android" density="ldpi" />
+    <icon src="img/splashes-icons/48.png"   width="48"   height="48"   platform="android" density="mdpi" />
+    <icon src="img/splashes-icons/72.png"   width="72"   height="72"   platform="android" density="hdpi" />
+    <icon src="img/splashes-icons/96.png"   width="96"   height="96"   platform="android" density="xhdpi" />
+    <icon src="img/splashes-icons/144.png"  width="144"  height="144"  platform="android" density="xxhdpi" />
 
-    <splash src="splash.png" />
-    <splash src="img/splashes-icons/ldpi.9.png"    platform="android" qualifier="ldpi" />             <!-- Android 200x320 -->
-    <splash src="img/splashes-icons/ldpi.9.png"    platform="android" qualifier="mdpi" />             <!-- Android 320x480 -->
-    <splash src="img/splashes-icons/hdpi.9.png"    platform="android" qualifier="hdpi" />             <!-- Android 480x800 -->
-    <splash src="img/splashes-icons/xhdpi.9.png"   platform="android" qualifier="xhdpi" />            <!-- Android 720px1280 -->
-    <splash src="img/splashes-icons/xhdpi.9.png"   platform="android" qualifier="xxhdpi" />           <!-- Android -->
-    <splash src="img/splashes-icons/320X426.png"                      width="320"  height="426" />
-    <splash src="img/splashes-icons/320X470.png"                      width="320"  height="470" />
-    <splash src="img/splashes-icons/320X480.png"   platform="ios"     width="320"  height="480" />    <!-- iPhone 3 -->
-    <splash src="img/splashes-icons/480X640.png"   platform="ios"     width="480"  height="640" />
-    <splash src="img/splashes-icons/640X960.png"   platform="ios"     width="640"  height="960" />    <!-- iPhone 4 (2x) -->
-    <splash src="img/splashes-icons/640X1136.png"  platform="ios"     width="640"  height="1136" />   <!-- iPhone 5 (2x) -->
-    <splash src="img/splashes-icons/720X960.png"                      width="720"  height="960" />
-    <splash src="img/splashes-icons/720X1280.png"                     width="720"  height="1280" />
-    <splash src="img/splashes-icons/750X1334.png"  platform="ios"     width="750"  height="1334" />   <!-- iPhone 6 (2x) -->
-    <splash src="img/splashes-icons/768X1024.png"  platform="ios"     width="768"  height="1024" />   <!-- iPad -->
-    <splash src="img/splashes-icons/1536X2048.png" platform="ios"     width="1536" height="2048" />   <!-- iPad 2 (2x) -->
-    <splash src="img/splashes-icons/1080X1920.png"                    width="1080" height="1920" />
-    <splash src="img/splashes-icons/1242X2208.png" platform="ios"     width="1242" height="2208" />   <!-- iPhone 6 Plus (3x) -->
+    <splash src="img/splashes-icons/Default@2x~universal~anyany.png" platform="ios" />
+    <splash src="img/splashes-icons/Default@3x~universal~anyany.png" platform="ios" />
+    <splash src="img/splashes-icons/ldpi.9.png"  density="ldpi"      platform="android" />        <!-- Android 200x320 -->
+    <splash src="img/splashes-icons/ldpi.9.png"  density="mdpi"      platform="android" />        <!-- Android 320x480 -->
+    <splash src="img/splashes-icons/hdpi.9.png"  density="hdpi"      platform="android" />        <!-- Android 480x800 -->
+    <splash src="img/splashes-icons/xhdpi.9.png" density="xhdpi"     platform="android" />        <!-- Android 720px1280 -->
+    <splash src="img/splashes-icons/xhdpi.9.png" density="xxhdpi"    platform="android" />        <!-- Android -->
 
+    <preference name="phonegap-version" value="cli-8.0.0" />
     <platform name="ios" />
     <platform name="android" />
-    <platform name="windows" />
     
     <!-- GENERAL PREFERENCES -->
-    <preference name="phonegap-version"                 value="cli-6.5.0" />
-    <preference name="android-minSdkVersion"            value="21" /> <!-- Android 5.0 -->
+    <content src="index.html" />
+    <preference name="fullscreen" value="false" />    
     <preference name="AndroidPersistentFileLocation"    value="Internal" />
     <preference name="iosPersistentFileLocation"        value="Library" />
     <preference name="android-build-tool"               value="gradle" />
@@ -93,11 +85,6 @@
     
     <feature name="StatusBar"><param name="ios-package" value="CDVStatusBar" onload="true" /></feature>
     
-    <preference name="windows-identity-name"            value="35519Webmotoric.TheAvatarGenerator" />
-    <preference name="windows-arch"                     value="anycpu" />
-    <preference name="windows-appx-target"              value="uap" />
-    <preference name="windows-target-version"           value="10.0" />
-
     <!-- CORE PLUGINS -->
     <plugin name="cordova-plugin-device"                source="npm" />
     <plugin name="cordova-plugin-dialogs"               source="npm" />
@@ -107,37 +94,11 @@
     <plugin name="cordova-plugin-statusbar"             source="npm" spec="2.2.0" />
     <plugin name="cordova.plugins.diagnostic"           source="npm" />
     
-    <!-- WKWEBVIEW -->
-    <!--
-    <platform name="ios">
-        <plugin name="cordova-plugin-wkwebview-engine" source="npm" />
-        <feature name="CDVWKWebViewEngine"><param name="ios-package" value="CDVWKWebViewEngine" /></feature>
-        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-    </platform>
-    -->
-    
-    <!-- CROSSWALK -->
-    <!--
-    <platform name="android">
-        <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.1" source="git" />
-        <plugin name="cordova-plugin-crosswalk-webview" source="npm" version="2.3.0" />
-        <preference name="buildArchitecture" value="arm" />
-        <preference name="xwalkCommandLine" value="- -disable-pull-to-refresh-effect" />
-        <preference name="xwalkCommandLine" value="- -disable-gesture-requirement-for-media-playback" />
-        <preference name="xwalkCommandLine" value="- -ignore-gpu-blacklist" />
-        <preference name="xwalkCommandLine" value="- -force-gpu-rasterization" />
-        <preference name="xwalkVersion" value="19+" />
-    </platform>
-    -->
-
-    <!-- CONFIGS -->
-    <!--config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file-->
-    <!--config-file platform="ios" parent="CFBundleShortVersionString"><string>0.0.0</string></config-file -->
-    <!--config-file platform="ios" parent="CFBundleVersion"><string>0.0.0</string></config-file -->
-    <config-file platform="android" parent="/manifest"><application android:largeHeap="true"></application></config-file>
-    <config-file platform="android" parent="/manifest"><application android:hardwareAccelerated="true"></application></config-file>
-    <config-file platform="ios" parent="UIStatusBarHidden" overwrite="true"><true /></config-file>
-    <config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true"><false /></config-file>    
+    <edit-config file="*-Info.plist" target="UIStatusBarHidden" mode="merge"><true /></edit-config>
+    <edit-config file="*-Info.plist" target="UIViewControllerBasedStatusBarAppearance" mode="merge"><false /></edit-config>
+    <edit-config file="*-Info.plist" target="NSPhotoLibraryUsageDescription" mode="merge"><string>Granting The Avatar Generator access to your photos will allow you to save your artwork.</string></edit-config>
+    <edit-config file="*-Info.plist" target="NSPhotoLibraryAddUsageDescription" mode="merge"><string>Granting The Avatar Generator access to your photos will allow you to save your artwork.</string></edit-config>
+    <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge"><application android:debuggable="false" android:largeHeap="true" android:hardwareAccelerated="true"></application></edit-config>
 
     <allow-intent href="*" />
     <allow-navigation href="*" />
