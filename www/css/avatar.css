@@ -286,6 +286,7 @@ body {
 }
 .a-logo-face {
     transform-origin: 50% 60%;
+    transform-box: fill-box;
     animation-name: a-logo-face-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
@@ -293,6 +294,7 @@ body {
 }
 .a-logo-eye1 {
     transform-origin: 50% 50%;
+    transform-box: fill-box;
     animation-name: a-logo-eye1-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
@@ -300,6 +302,7 @@ body {
 }
 .a-logo-eye2 {
     transform-origin: 50% 50%;
+    transform-box: fill-box;
     animation-name: a-logo-eye2-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
